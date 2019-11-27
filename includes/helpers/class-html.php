@@ -84,6 +84,10 @@ class Html {
    * @return  string
    */
   public static function tag( $tag, $content = '', $attributes = [] ) {
+    if ( empty( $tag ) ) {
+      return $content;
+    }
+
     static::parse_shorthand( $tag, $attributes );
 
     // This filter allows to you override the tag attributes
@@ -185,7 +189,7 @@ class Html {
       }
 
       if ( is_bool( $value ) && $value ) {
-        $value = $key;
+        $value = null;
       }
 
       if ( is_array( $value ) ) {

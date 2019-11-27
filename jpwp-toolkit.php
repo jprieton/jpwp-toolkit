@@ -89,6 +89,7 @@ spl_autoload_register( function( $class_name ) {
     var_dump( $class_name, $filename, $info['file'] );
     die;
   } else {
+    // translators: %s: class name 
     wp_die( sprintf( __( "The class %s could not be loaded", 'jpwp-toolkit' ), "<b><code>{$class_name}</code></b>" ) );
   }
 } );

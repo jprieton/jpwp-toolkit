@@ -4,7 +4,7 @@
  * Plugin Name:   JPWP Toolkit
  * Plugin URI:    https://github.com/jprieton/jpwp-toolkit
  * Description:   An extensible object-oriented set of tools for WordPress that helps you to develop themes and plugins.
- * Version:       0.2.0
+ * Version:       0.2.1
  * Author:        Javier Prieto
  * Author URI:    https://github.com/jprieton
  * Text Domain:   jpwp-toolkit
@@ -33,7 +33,7 @@ defined( 'ABSPATH' ) || exit;
  * Define plugin constants
  * @since 0.1.0
  */
-define( 'JPWP_VERSION', '0.2.0' );
+define( 'JPWP_VERSION', '0.2.1' );
 define( 'JPWP_FILENAME', __FILE__ );
 define( 'JPWP_BASENAME', plugin_basename( __FILE__ ) );
 define( 'JPWP_BASEDIR', trailingslashit( __DIR__ ) );
@@ -97,20 +97,20 @@ spl_autoload_register( function( $class_name ) {
 // Load the plugin textdomain
 add_action( 'plugins_loaded', [ 'JPWPToolkit\Core\Textdomain', 'load_plugin_textdomain' ] );
 
-// Add tanslation to plugin description
-add_action( 'all_plugins', [ 'JPWPToolkit\Core\Textdomain', 'modify_plugin_description' ] );
+use JPWPToolkit\Core\Admin_Notice;
+use JPWPToolkit\Core\Init;
 
 // Check if the minimum requirements are met
 if ( version_compare( PHP_VERSION, '5.6.20', '<' ) ) {
 
   // Show notice for minimum PHP version required for SourceFramework
-  new JPWPToolkit\Core\Admin_Notice( __( 'JPWP Toolkit requires PHP version 5.6.20 or later.', 'jpwp-toolkit' ), [
+  new Admin_Notice( __( 'JPWP Toolkit requires PHP version 5.6.20 or later.', 'jpwp-toolkit' ), [
       'type'        => 'error',
       'dismissible' => true,
           ] );
 } else {
 
   // Initialize the plugin
-  JPWPToolkit\Core\Init::get_instance();
+  Init::get_instance();
 }
 

@@ -9,6 +9,8 @@ use JPWPToolkit\Filters\Img_Pixel_Shorthand;
 use JPWPToolkit\Filters\Img_Placeholder_Shorthand;
 use JPWPToolkit\Filters\Img_Not_Available_Shorthand;
 
+use JPWPToolkit\Core\Cron;
+
 /**
  * Class to initialize plugin
  *
@@ -32,8 +34,11 @@ final class Init {
    * @since     0.1.0
    */
   protected function __construct() {
-    // add image shorthands filters
+    // Add image shorthands filters
     $this->add_image_shorthands();
+
+    // Add scheduled events
+    $this->add_scheduled_events();
   }
 
   /**
@@ -41,10 +46,19 @@ final class Init {
    *
    * @since     0.1.0
    */
-  public function add_image_shorthands() {
+  private function add_image_shorthands() {
     new Img_Pixel_Shorthand();
     new Img_Placeholder_Shorthand();
     new Img_Not_Available_Shorthand();
+  }
+
+  /**
+   * Initialize scheduled tasks
+   * 
+   * @since     0.3.0
+   */
+  private function add_scheduled_events() {
+    new Cron();
   }
 
 }

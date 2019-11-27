@@ -3,9 +3,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: JPWP Toolkit 0.2.0\n"
-"Report-Msgid-Bugs-To: https://github.com/jprieton/jpwp-toolkit/issues\n"
-"POT-Creation-Date: 2019-11-27 02:14-0400\n"
-"PO-Revision-Date: 2019-11-27 02:23-0400\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/jpwp-toolkit\n"
+"POT-Creation-Date: 2019-11-27T03:05:58-04:00\n"
+"PO-Revision-Date: 2019-11-27 03:06-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -25,7 +25,6 @@ msgid "https://github.com/jprieton/jpwp-toolkit"
 msgstr "https://github.com/jprieton/jpwp-toolkit"
 
 #. Description of the plugin
-#: includes/core/class-textdomain.php:36
 msgid ""
 "An extensible object-oriented set of tools for WordPress that helps you to "
 "develop themes and plugins."
@@ -40,6 +39,14 @@ msgstr "Javier Prieto"
 #. Author URI of the plugin
 msgid "https://github.com/jprieton"
 msgstr "https://github.com/jprieton"
+
+#: includes/core/class-cron.php:50
+msgid "Once weekly"
+msgstr "Semanalmente"
+
+#: includes/core/class-cron.php:54
+msgid "Once monthly"
+msgstr "Mensualmente"
 
 #: includes/filters/class-img-not-available-shorthand.php:78
 #: includes/filters/class-img-placeholder-shorthand.php:98

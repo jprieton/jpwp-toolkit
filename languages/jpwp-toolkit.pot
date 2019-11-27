@@ -1,18 +1,17 @@
 # Copyright (C) 2019 Javier Prieto
 # This file is distributed under the same license as the JPWP Toolkit plugin.
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: JPWP Toolkit 0.2.0\n"
-"Report-Msgid-Bugs-To: https://github.com/jprieton/jpwp-toolkit/issues\n"
+"Project-Id-Version: JPWP Toolkit 0.2.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/jpwp-toolkit\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-11-27 02:14-0400\n"
+"POT-Creation-Date: 2019-11-27T03:05:58-04:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: WP-CLI 2.3.0\n"
 "X-Domain: jpwp-toolkit\n"
 
 #. Plugin Name of the plugin
@@ -24,7 +23,6 @@ msgid "https://github.com/jprieton/jpwp-toolkit"
 msgstr ""
 
 #. Description of the plugin
-#: includes/core/class-textdomain.php:36
 msgid "An extensible object-oriented set of tools for WordPress that helps you to develop themes and plugins."
 msgstr ""
 
@@ -34,6 +32,14 @@ msgstr ""
 
 #. Author URI of the plugin
 msgid "https://github.com/jprieton"
+msgstr ""
+
+#: includes/core/class-cron.php:50
+msgid "Once weekly"
+msgstr ""
+
+#: includes/core/class-cron.php:54
+msgid "Once monthly"
 msgstr ""
 
 #: includes/filters/class-img-not-available-shorthand.php:78

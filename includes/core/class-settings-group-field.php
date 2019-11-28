@@ -167,7 +167,7 @@ class Settings_Group_Field extends Settings_Group {
     ];
 
     $attributes = wp_parse_args( $field, $defaults );
-    $input      = Html::tag( 'textarea', $value, $attributes );
+    $input      = Form::textarea( $value, $attributes );
 
     echo $input . $desc;
   }

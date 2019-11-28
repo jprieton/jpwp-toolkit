@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JPWP Toolkit 0.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/jpwp-toolkit\n"
-"POT-Creation-Date: 2019-11-27T03:05:58-04:00\n"
-"PO-Revision-Date: 2019-11-27 03:06-0400\n"
+"POT-Creation-Date: 2019-11-28T05:40:26-04:00\n"
+"PO-Revision-Date: 2019-11-28 05:42-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -40,22 +40,33 @@ msgstr "Javier Prieto"
 msgid "https://github.com/jprieton"
 msgstr "https://github.com/jprieton"
 
-#: includes/core/class-cron.php:50
+#: includes/admin/class-social-network-page.php:48
+msgid "Social Networks Links"
+msgstr "Enlaces a redes sociales"
+
+#: includes/admin/class-social-network-page.php:48
+msgid "Social"
+msgstr "Social"
+
+#: includes/core/class-schedule-events.php:46
 msgid "Once weekly"
 msgstr "Semanalmente"
 
-#: includes/core/class-cron.php:54
+#: includes/core/class-schedule-events.php:50
 msgid "Once monthly"
 msgstr "Mensualmente"
 
 #: includes/filters/class-img-not-available-shorthand.php:78
-#: includes/filters/class-img-placeholder-shorthand.php:98
-msgid "Placeholder image"
-msgstr ""
+msgid "Not available image"
+msgstr "Imagen no disponible"
 
 #: includes/filters/class-img-pixel-shorthand.php:72
 msgid "Pixel image"
-msgstr ""
+msgstr "Imagen de un píxel"
+
+#: includes/filters/class-img-placeholder-shorthand.php:98
+msgid "Placeholder image"
+msgstr "Imagen de marcador de posición"
 
 #. translators: %s: class name
 #: jpwp-toolkit.php:93

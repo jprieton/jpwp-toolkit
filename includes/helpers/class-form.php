@@ -64,17 +64,12 @@ class Form {
    * @since 0.3.0
    *
    * @param   string              $name
-   * @param   string              $text
+   * @param   string              $content
    * @param   array|string        $attributes
    * @return  string
    */
-  public static function textarea( $name, $text = '', $attributes = [] ) {
-    $defaults   = [
-        'name' => $name,
-    ];
-    $attributes = wp_parse_args( $attributes, $defaults );
-
-    return Html::textarea( esc_textarea( $text ), $attributes );
+  public static function textarea( $content = '', $attributes = [] ) {
+    return Html::textarea( esc_textarea( $content ), $attributes );
   }
 
   /**

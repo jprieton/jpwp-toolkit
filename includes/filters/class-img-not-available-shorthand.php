@@ -75,7 +75,7 @@ class Img_Not_Available_Shorthand extends Abstract_Img_Shorthand implements Inte
 
     // Updtate alt value
     $attributes['alt'] = empty( $attributes['alt'] ) ?
-            __( 'Placeholder image', 'jpwp-toolkit' ) : $attributes['alt'];
+            __( 'Not available image', 'jpwp-toolkit' ) : $attributes['alt'];
 
     // Allow filter all attributes
     $attributes = apply_filters( 'jpwp_toolkit_helpers_html_img_not_available_attributes', $attributes );

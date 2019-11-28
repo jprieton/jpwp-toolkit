@@ -57,8 +57,8 @@ final class Social_Network_Page extends Settings_Page {
     $this->add_settings_section( 'social_network_links_settings_section_links' );
 
     $networks = [
-        'facebook'  => 'Facebook',
         'dribbble'  => 'Dribble',
+        'facebook'  => 'Facebook',
         'instagram' => 'Instagram',
         'linkedin'  => 'LinkedIn',
         'pinterest' => 'Pinterest',
@@ -71,9 +71,12 @@ final class Social_Network_Page extends Settings_Page {
     ];
 
     // Filter to allow to plugins/themes add more social networks
-    $social_network_links = apply_filters( 'jpwp_toolkit_social_network_links', $networks );
+    $networks = apply_filters( 'jpwp_toolkit_social_network_links', $networks );
 
-    foreach ( $social_network_links as $key => $label ) {
+    // Sort by label
+    asort( $networks );
+
+    foreach ( $networks as $key => $label ) {
       $this->settings_group_field->add_settings_field( $this->submenu_slug, "{$this->option_page}_settings_section_links", [
           'title'       => $label,
           'id'          => $key,

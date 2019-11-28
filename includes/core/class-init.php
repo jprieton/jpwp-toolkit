@@ -5,11 +5,16 @@ namespace JPWPToolkit\Core;
 // Exit if accessed directly
 defined( 'ABSPATH' ) || exit;
 
+// Admin Pages
+use JPWPToolkit\Admin\Social_Network_Page;
+
+// Html::img() shorthands
 use JPWPToolkit\Filters\Img_Pixel_Shorthand;
 use JPWPToolkit\Filters\Img_Placeholder_Shorthand;
 use JPWPToolkit\Filters\Img_Not_Available_Shorthand;
 
-use JPWPToolkit\Core\Cron;
+// Plugin schedule tasks
+use JPWPToolkit\Core\Schedule_Events;
 
 /**
  * Class to initialize plugin
@@ -34,22 +39,14 @@ final class Init {
    * @since     0.1.0
    */
   protected function __construct() {
-    // Add image shorthands filters
-    $this->add_image_shorthands();
+    // Add menu/submenu pages to admin panel's menu structure.
+    $this->add_admin_pages();
 
     // Add scheduled events
     $this->add_scheduled_events();
-  }
 
-  /**
-   * initialize image shorthands filters
-   *
-   * @since     0.1.0
-   */
-  private function add_image_shorthands() {
-    new Img_Pixel_Shorthand();
-    new Img_Placeholder_Shorthand();
-    new Img_Not_Available_Shorthand();
+    // Add image shorthands filters
+    $this->add_image_shorthands();
   }
 
   /**
@@ -58,7 +55,27 @@ final class Init {
    * @since     0.3.0
    */
   private function add_scheduled_events() {
-    new Cron();
+    new Schedule_Events();
+  }
+
+  /**
+   * Add menu/submenu pages to admin panel's menu structure.
+   *
+   * @since   0.3.0
+   */
+  private function add_admin_pages() {
+    new Social_Network_Page();
+  }
+
+  /**
+   * Add Html::img() shorthands
+   *
+   * @since     0.1.0
+   */
+  private function add_image_shorthands() {
+    new Img_Pixel_Shorthand();
+    new Img_Placeholder_Shorthand();
+    new Img_Not_Available_Shorthand();
   }
 
 }

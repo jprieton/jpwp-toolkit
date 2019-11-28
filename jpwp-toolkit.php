@@ -4,7 +4,7 @@
  * Plugin Name:   JPWP Toolkit
  * Plugin URI:    https://github.com/jprieton/jpwp-toolkit
  * Description:   An extensible object-oriented set of tools for WordPress that helps you to develop themes and plugins.
- * Version:       0.2.1
+ * Version:       0.3.0
  * Author:        Javier Prieto
  * Author URI:    https://github.com/jprieton
  * Text Domain:   jpwp-toolkit
@@ -33,7 +33,7 @@ defined( 'ABSPATH' ) || exit;
  * Define plugin constants
  * @since 0.1.0
  */
-define( 'JPWP_VERSION', '0.2.1' );
+define( 'JPWP_VERSION', '0.3.0' );
 define( 'JPWP_FILENAME', __FILE__ );
 define( 'JPWP_BASENAME', plugin_basename( __FILE__ ) );
 define( 'JPWP_BASEDIR', trailingslashit( __DIR__ ) );
@@ -113,4 +113,3 @@ if ( version_compare( PHP_VERSION, '5.6.20', '<' ) ) {
   // Initialize the plugin
   Init::get_instance();
 }
-

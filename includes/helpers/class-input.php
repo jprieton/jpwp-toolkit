@@ -1,6 +1,6 @@
 <?php
 
-namespace JPWPToolkit\Data;
+namespace JPWPToolkit\Helpers;
 
 // Exit if accessed directly
 defined( 'ABSPATH' ) || exit;

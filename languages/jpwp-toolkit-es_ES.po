@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JPWP Toolkit 0.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/jpwp-toolkit\n"
-"POT-Creation-Date: 2019-11-28T05:40:26-04:00\n"
-"PO-Revision-Date: 2019-11-28 05:42-0400\n"
+"POT-Creation-Date: 2019-11-30T03:35:58-04:00\n"
+"PO-Revision-Date: 2019-11-30 03:36-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -67,6 +67,10 @@ msgstr "Imagen de un píxel"
 #: includes/filters/class-img-placeholder-shorthand.php:98
 msgid "Placeholder image"
 msgstr "Imagen de marcador de posición"
+
+#: includes/helpers/class-form.php:201
+msgid "Select..."
+msgstr "Selecciona..."
 
 #. translators: %s: class name
 #: jpwp-toolkit.php:93

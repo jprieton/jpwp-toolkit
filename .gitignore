@@ -1,0 +1,31 @@
+# Editors
+/nbproject/private/
+
+# Grunt
+/node_modules/
+
+# Sass
+.sass-cache/
+
+# Compiled CSS
+/assets/css/*.css
+
+# Minified JS
+/assets/js/admin/*.min.js
+/assets/js/frontend/*.min.js
+
+# OS X
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Composer
+/vendor/
+contributors.md
+
+# Unit tests
+/tmp
+/tests/bin/tmp
+/tests/e2e-tests/config/local-*.json
+/tests/e2e-tests/config/local.json

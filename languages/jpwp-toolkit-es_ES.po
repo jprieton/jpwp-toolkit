@@ -3,9 +3,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: JPWP Toolkit 0.2.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/jpwp-toolkit\n"
-"POT-Creation-Date: 2019-11-30T03:35:58-04:00\n"
-"PO-Revision-Date: 2019-11-30 03:36-0400\n"
+"Report-Msgid-Bugs-To: https://github.com/jprieton/jpwp-toolkit/issues\n"
+"POT-Creation-Date: 2019-11-30 12:38:28+00:00\n"
+"PO-Revision-Date: 2019-11-30 08:41-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -15,30 +15,6 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 "X-Domain: jpwp-toolkit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#. Plugin Name of the plugin
-msgid "JPWP Toolkit"
-msgstr "JPWP Toolkit"
-
-#. Plugin URI of the plugin
-msgid "https://github.com/jprieton/jpwp-toolkit"
-msgstr "https://github.com/jprieton/jpwp-toolkit"
-
-#. Description of the plugin
-msgid ""
-"An extensible object-oriented set of tools for WordPress that helps you to "
-"develop themes and plugins."
-msgstr ""
-"Un set de herramientas  orientado a objetos para WordPress que te ayuda a "
-"desarrollar temas y complementos."
-
-#. Author of the plugin
-msgid "Javier Prieto"
-msgstr "Javier Prieto"
-
-#. Author URI of the plugin
-msgid "https://github.com/jprieton"
-msgstr "https://github.com/jprieton"
 
 #: includes/admin/class-social-network-page.php:48
 msgid "Social Networks Links"
@@ -80,3 +56,27 @@ msgstr "No se pudo cargar las clase %s"
 #: jpwp-toolkit.php:107
 msgid "JPWP Toolkit requires PHP version 5.6.20 or later."
 msgstr "JPWP Toolkit requiere PHP versión 5.6.20 o superior."
+
+#. Plugin Name of the plugin/theme
+msgid "JPWP Toolkit"
+msgstr "JPWP Toolkit"
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/jprieton/jpwp-toolkit"
+msgstr "https://github.com/jprieton/jpwp-toolkit"
+
+#. Description of the plugin/theme
+msgid ""
+"An extensible object-oriented set of tools for WordPress that helps you to "
+"develop themes and plugins."
+msgstr ""
+"Un set de herramientas  orientado a objetos para WordPress que te ayuda a "
+"desarrollar temas y complementos."
+
+#. Author of the plugin/theme
+msgid "Javier Prieto"
+msgstr "Javier Prieto"
+
+#. Author URI of the plugin/theme
+msgid "https://github.com/jprieton"
+msgstr "https://github.com/jprieton"

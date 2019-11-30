@@ -1,0 +1,47 @@
+{
+  "name": "jpwp-toolkit",
+  "title": "JPWP Toolkit",
+  "version": "0.4.0",
+  "description": "JPWP Toolkit is an extensible object-oriented set of tools for WordPress that helps you to develop themes and plugins.",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "build": "grunt",
+    "lint:js": "eslint assets/js --ext=js",
+    "makepot": "grunt makepot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jprieton/jpwp-toolkit.git"
+  },
+  "keywords": [
+    "wordpress",
+    "theme",
+    "plugin",
+    "toolkit"
+  ],
+  "author": "Javier Prieto",
+  "license": "GPL-3.0+",
+  "bugs": {
+    "url": "https://github.com/jprieton/jpwp-toolkit/issues"
+  },
+  "homepage": "https://github.com/jprieton/jpwp-toolkit#readme",
+  "devDependencies": {
+    "autoprefixer": "^9.7.2",
+    "grunt": "^1.0.4",
+    "grunt-checktextdomain": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^3.0.0",
+    "grunt-contrib-jshint": "^2.1.0",
+    "grunt-contrib-uglify": "^4.0.1",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-postcss": "^0.9.0",
+    "grunt-rtlcss": "^2.0.2",
+    "grunt-sass": "^3.1.0",
+    "grunt-stylelint": "^0.12.0",
+    "grunt-wp-i18n": "^1.0.3",
+    "node-sass": "^4.13.0",
+    "stylelint": "^12.0.0",
+    "stylelint-config-wordpress": "^15.0.0"
+  }
+}

@@ -1,38 +1,17 @@
 # Copyright (C) 2019 Javier Prieto
-# This file is distributed under the same license as the JPWP Toolkit plugin.
+# This file is distributed under the same license as the JPWP Toolkit package.
 msgid ""
 msgstr ""
 "Project-Id-Version: JPWP Toolkit 0.3.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/jpwp-toolkit\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Report-Msgid-Bugs-To: https://github.com/jprieton/jpwp-toolkit/issues\n"
+"POT-Creation-Date: 2019-11-30 12:42:44+00:00\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-11-30T03:35:58-04:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.3.0\n"
-"X-Domain: jpwp-toolkit\n"
-
-#. Plugin Name of the plugin
-msgid "JPWP Toolkit"
-msgstr ""
-
-#. Plugin URI of the plugin
-msgid "https://github.com/jprieton/jpwp-toolkit"
-msgstr ""
-
-#. Description of the plugin
-msgid "An extensible object-oriented set of tools for WordPress that helps you to develop themes and plugins."
-msgstr ""
-
-#. Author of the plugin
-msgid "Javier Prieto"
-msgstr ""
-
-#. Author URI of the plugin
-msgid "https://github.com/jprieton"
-msgstr ""
+"PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"X-Generator: grunt-wp-i18n 1.0.3\n"
 
 #: includes/admin/class-social-network-page.php:48
 msgid "Social Networks Links"
@@ -66,11 +45,33 @@ msgstr ""
 msgid "Select..."
 msgstr ""
 
-#. translators: %s: class name
 #: jpwp-toolkit.php:93
+#. translators: %s: class name
 msgid "The class %s could not be loaded"
 msgstr ""
 
 #: jpwp-toolkit.php:107
 msgid "JPWP Toolkit requires PHP version 5.6.20 or later."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "JPWP Toolkit"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/jprieton/jpwp-toolkit"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"An extensible object-oriented set of tools for WordPress that helps you to "
+"develop themes and plugins."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Javier Prieto"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://github.com/jprieton"
 msgstr ""

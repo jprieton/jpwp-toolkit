@@ -7,12 +7,13 @@ defined( 'ABSPATH' ) || exit;
 
 // Admin Pages
 use JPWPToolkit\Admin\Social_Network_Page;
-
 // Html::img() shorthands
 use JPWPToolkit\Filters\Img_Pixel_Shorthand;
 use JPWPToolkit\Filters\Img_Placeholder_Shorthand;
 use JPWPToolkit\Filters\Img_Not_Available_Shorthand;
-
+// Form::options() shorthands
+use JPWPToolkit\Filters\Options_Weekdays_Shorthand;
+use JPWPToolkit\Filters\Options_Months_Shorthand;
 // Plugin schedule tasks
 use JPWPToolkit\Core\Schedule_Events;
 
@@ -47,6 +48,9 @@ final class Init {
 
     // Add image shorthands filters
     $this->add_image_shorthands();
+
+    // Add image shorthands filters
+    $this->add_options_shorthands();
   }
 
   /**
@@ -76,6 +80,16 @@ final class Init {
     new Img_Pixel_Shorthand();
     new Img_Placeholder_Shorthand();
     new Img_Not_Available_Shorthand();
+  }
+
+  /**
+   * Add Form::option() shorthands
+   *
+   * @since     0.3.0
+   */
+  private function add_options_shorthands() {
+    new Options_Weekdays_Shorthand();
+    new Options_Months_Shorthand();
   }
 
 }

@@ -46,10 +46,10 @@ class Html {
     if ( empty( $tag ) ) {
       return '';
     }
-    static::parse_shorthand( $tag, $attributes );
-    $attributes = static::parse_attributes( $attributes );
+    self::parse_shorthand( $tag, $attributes );
+    $attributes = self::parse_attributes( $attributes );
 
-    if ( in_array( $tag, static::$void ) ) {
+    if ( in_array( $tag, self::$void ) ) {
       $html = sprintf( '<%s />', trim( $tag . ' ' . $attributes ) );
     } else {
       $html = sprintf( '<%s>', trim( $tag . ' ' . $attributes ) );
@@ -70,7 +70,7 @@ class Html {
     if ( empty( $tag ) ) {
       return '';
     }
-    return in_array( $tag, static::$void ) ? '' : sprintf( '</%s>', trim( esc_attr( $tag ) ) );
+    return in_array( $tag, self::$void ) ? '' : sprintf( '</%s>', trim( esc_attr( $tag ) ) );
   }
 
   /**
@@ -88,13 +88,13 @@ class Html {
       return $content;
     }
 
-    static::parse_shorthand( $tag, $attributes );
+    self::parse_shorthand( $tag, $attributes );
 
     // This filter allows to you override the tag attributes
     $attributes = apply_filters( "jpwp_toolkit_helpers_html_{$tag}_attributes", $attributes, $tag );
-    $attributes = static::parse_attributes( $attributes );
+    $attributes = self::parse_attributes( $attributes );
 
-    if ( in_array( $tag, static::$void ) ) {
+    if ( in_array( $tag, self::$void ) ) {
       $html = sprintf( '<%s />', trim( "{$tag} {$attributes}" ) );
     } else {
       $html = sprintf( '<%s>%s</%s>', trim( "{$tag} {$attributes}" ), $content, $tag );
@@ -118,7 +118,11 @@ class Html {
    *
    * @return  string
    */
-  public static function img( $src = '', $attributes = [] ) {
+  public static function img( $src, $attributes = [] ) {
+    if ( empty( $src ) ) {
+      return '';
+    }
+
     $attributes = wp_parse_args( $attributes );
 
     // Filter to allow overrides the src
@@ -275,7 +279,7 @@ class Html {
     ];
     $attributes = wp_parse_args( $attributes, $defaults );
 
-    return static::tag( 'a', $content, $attributes );
+    return self::tag( 'a', $content, $attributes );
   }
 
   /**
@@ -292,13 +296,13 @@ class Html {
 
     foreach ( (array) $list as $key => $item ) {
       if ( is_array( $item ) ) {
-        $content .= static::tag( 'li', $key . static::ul( $item ) );
+        $content .= self::tag( 'li', $key . self::ul( $item ) );
       } else {
-        $content .= static::tag( 'li', $item );
+        $content .= self::tag( 'li', $item );
       }
     }
 
-    $content = static::tag( 'ul', $content, $attributes );
+    $content = self::tag( 'ul', $content, $attributes );
     return $content;
   }
 
@@ -316,13 +320,13 @@ class Html {
 
     foreach ( (array) $list as $key => $item ) {
       if ( is_array( $item ) ) {
-        $content .= static::tag( 'li', $key . static::ol( $item ) );
+        $content .= self::tag( 'li', $key . self::ol( $item ) );
       } else {
-        $content .= static::tag( 'li', $item );
+        $content .= self::tag( 'li', $item );
       }
     }
 
-    $content = static::tag( 'ol', $content, $attributes );
+    $content = self::tag( 'ol', $content, $attributes );
     return $content;
   }
 
@@ -345,7 +349,7 @@ class Html {
     }
 
     list($content, $attributes) = $arguments;
-    $html = static::tag( $tag, $content, $attributes );
+    $html = self::tag( $tag, $content, $attributes );
 
     return $html;
   }

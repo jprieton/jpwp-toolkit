@@ -42,14 +42,11 @@ class Form {
    *
    * @since 0.3.0
    *
-   * @param   string              $name
-   * @param   string              $value
    * @param   array|string        $attributes
    * @return  string
    */
   public static function input( $attributes = [] ) {
     $defaults   = [
-        'name'  => '',
         'value' => '',
         'type'  => 'text'
     ];
@@ -201,7 +198,7 @@ class Form {
     if ( !empty( $attributes['placeholder'] ) && !is_bool( $attributes['placeholder'] ) ) {
       $placeholder = $attributes['placeholder'];
     } elseif ( !empty( $attributes['placeholder'] ) && is_bool( $attributes['placeholder'] ) && $attributes['placeholder'] ) {
-      $placeholder = __( 'Select...', SF_TEXTDOMAIN );
+      $placeholder = __( 'Select...', 'jpwp-toolkit' );
     }
 
     if ( !empty( $attributes['required'] ) && is_bool( $attributes['required'] ) && $attributes['required'] ) {
@@ -231,41 +228,35 @@ class Form {
    *
    * @since 0.3.0
    *
-   * @global WP_Locale            $wp_locale
-   *
    * @param  array|string         $options
    * @param  array                $selected
    * @return string
    */
   public static function options( $options, $selected = '' ) {
-    global $wp_locale;
+    // Filter to allow add shorthands
+    $shorthands = apply_filters( 'jpwp_toolkit_helpers_form_options_shorthands', [] );
 
-    $_options = '';
-
-    switch ( $options ) {
-      case 'month':
-        $options = $wp_locale->month;
-        break;
-      case 'weekday':
-        $options = $wp_locale->weekday;
-        break;
-      default:
-        $options = (array) $options;
-        break;
+    if ( is_string( $options ) && in_array( $options, $shorthands ) ) {
+      $options = apply_filters( "jpwp_toolkit_helpers_form_options_shorthand_{$options}", $options );
     }
 
+    $options = (array) apply_filters( 'jpwp_toolkit_helpers_form_options', $options );
+
+    $html = '';
+    
     foreach ( $options as $key => $value ) {
       if ( is_array( $value ) ) {
-        $_options .= Html::tag( 'optgroup', self::options( $value, $selected ), [ 'label' => $key ] );
+        $html .= Html::optgroup( self::options( $value, $selected ), [ 'label' => $key ] );
       } else {
         $attributes = [
             'value'    => $key,
-            'selected' => (!empty( $selected ) && $selected == $key) ? 'selected' : false,
+            'selected' => (!empty( $selected ) && $selected == $key),
         ];
-        $_options   .= Html::tag( 'option', $value, $attributes );
+        $html   .= Html::option( $value, $attributes );
       }
     }
-    return $_options;
+    
+    return $html;
   }
 
 }

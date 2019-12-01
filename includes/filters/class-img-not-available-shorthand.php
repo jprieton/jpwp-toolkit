@@ -1,8 +1,14 @@
 <?php
+/**
+ * Add the not_available shorthand to Html::img() method
+ * 
+ * @package       JPWPToolkit
+ * @subpackage    Filters
+ */
 
 namespace JPWPToolkit\Filters;
 
-// Exit if accessed directly
+// Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
 use JPWPToolkit\Interfaces\Img_Shorthand as Interface_Img_Shorthand;
@@ -28,31 +34,20 @@ class Img_Not_Available_Shorthand extends Abstract_Img_Shorthand implements Inte
   use \JPWPToolkit\Traits\Img_Shorthand;
 
   /**
-   * @var     string Shorthand name
+   * Shorthand handler
+   * 
+   * @var     string
    * @since   0.1.0
    */
-  private $name = 'not_available';
-
-  /**
-   * Adds the shorthand
-   * 
-   * @since   0.1.0
-   * 
-   * @param   array $shorthands
-   * @return  array
-   */
-  public function add_shorthand( $shorthands = [] ) {
-    $shorthands[] = $this->name;
-    return $shorthands;
-  }
+  private $handler = 'not_available';
 
   /**
    * Parse the shorthand
    * 
    * @since   0.1.0
    * 
-   * @param type $attributes
-   * @param type $src
+   * @param array  $attributes An array of html attributes.
+   * @param string $src The img handler.
    */
   public function parse_shorthand( $attributes, $src ) {
     $attributes = $this->get_image_size_attributes( $src, $attributes );
@@ -66,19 +61,19 @@ class Img_Not_Available_Shorthand extends Abstract_Img_Shorthand implements Inte
       $src = JPWP_BASEURL . 'assets/images/not-available.svg';
     }
 
-    // Set src of the image
+    // Set src of the image.
     $attributes['src'] = $src;
 
-    // Update css classes
+    // Update css classes.
     $attributes['class'] = empty( $attributes['class'] ) ?
             'image-not-available' : $attributes['class'] . ' image-not-available';
 
-    // Updtate alt value
+    // Updtate alt value.
     $attributes['alt'] = empty( $attributes['alt'] ) ?
             __( 'Not available image', 'jpwp-toolkit' ) : $attributes['alt'];
 
-    // Allow filter all attributes
-    $attributes = apply_filters( 'jpwp_toolkit_helpers_html_img_not_available_attributes', $attributes );
+    // Allow filter all attributes.
+    $attributes = apply_filters( "jpwp_toolkit_helpers_html_img_{$this->handler}_attributes", $attributes );
 
     return $attributes;
   }

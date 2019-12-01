@@ -1,8 +1,14 @@
 <?php
+/**
+ * Add the placeholder handler to Html::img()
+ * 
+ * @package       JPWPToolkit
+ * @subpackage    Filter
+ */
 
 namespace JPWPToolkit\Filters;
 
-// Exit if accessed directly
+// Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
 use JPWPToolkit\Interfaces\Img_Shorthand as Interface_Img_Shorthand;
@@ -28,10 +34,12 @@ class Img_Placeholder_Shorthand extends Abstract_Img_Shorthand implements Interf
   use \JPWPToolkit\Traits\Img_Shorthand;
 
   /**
-   * @var     string Shorthand name
+   * Shorthand handler
+   * 
+   * @var     string
    * @since   0.1.0
    */
-  private $name = 'placeholder';
+  private $handler = 'placeholder';
 
   /**
    * Overrides the class constructor to allow use the WordPress image sizes as shorthand for placeholder
@@ -43,27 +51,14 @@ class Img_Placeholder_Shorthand extends Abstract_Img_Shorthand implements Interf
       $this->image_sizes = get_intermediate_image_sizes();
     }
 
-    // Allow to use the WordPress image sizes as alias of placeholder
+    // Allow to use the WordPress image sizes as alias of placeholder.
     add_filter( "jpwp_toolkit_helpers_html_img_src", [ $this, 'parse_src' ], 10, 2 );
 
-    // Add shorthands keywords
-    add_filter( 'jpwp_toolkit_helpers_html_img_shorthands', [ $this, 'add_shorthand' ] );
+    // Add shorthands keywords.
+    add_filter( 'jpwp_toolkit_helpers_html_img_shorthand_handlers', [ $this, 'add_shorthand_handler' ] );
 
-    // add image shorthands filters
-    add_filter( "jpwp_toolkit_helpers_html_img_shorthand_{$this->name}", [ $this, 'parse_shorthand' ], 10, 2 );
-  }
-
-  /**
-   * Adds the shorthand
-   * 
-   * @since   0.1.0
-   * 
-   * @param   array $shorthands
-   * @return  array
-   */
-  public function add_shorthand( $shorthands = [] ) {
-    $shorthands[] = $this->name;
-    return $shorthands;
+    // add image shorthands filters.
+    add_filter( "jpwp_toolkit_helpers_html_img_shorthand_{$this->handler}", [ $this, 'parse_shorthand' ], 10, 2 );
   }
 
   /**
@@ -71,8 +66,8 @@ class Img_Placeholder_Shorthand extends Abstract_Img_Shorthand implements Interf
    * 
    * @since   0.1.0
    * 
-   * @param array   $attributes
-   * @param string  $src
+   * @param array  $attributes An array of html attributes.
+   * @param string $src The img handler.
    */
   public function parse_shorthand( $attributes, $src ) {
     $attributes = $this->get_image_size_attributes( $src, $attributes );
@@ -86,19 +81,19 @@ class Img_Placeholder_Shorthand extends Abstract_Img_Shorthand implements Interf
       $src = JPWP_BASEURL . 'assets/images/placeholder.svg';
     }
 
-    // Set src of the image
+    // Set src of the image.
     $attributes['src'] = $src;
 
-    // Update css classes
+    // Update css classes.
     $attributes['class'] = empty( $attributes['class'] ) ?
             'image-placeholder' : $attributes['class'] . ' image-placeholder';
 
-    // Updtate alt value
+    // Updtate alt value.
     $attributes['alt'] = empty( $attributes['alt'] ) ?
             __( 'Placeholder image', 'jpwp-toolkit' ) : $attributes['alt'];
 
-    // Allow filter all attributes
-    $attributes = apply_filters( 'jpwp_toolkit_helpers_html_img_placeholder_attributes', $attributes );
+    // Allow filter all attributes.
+    $attributes = apply_filters( "jpwp_toolkit_helpers_html_img_{$this->handler}_attributes", $attributes );
 
     return $attributes;
   }
@@ -108,13 +103,13 @@ class Img_Placeholder_Shorthand extends Abstract_Img_Shorthand implements Interf
    * 
    * @since   0.1.0
    * 
-   * @param   string  $src
+   * @param   string $src The img handler.
    * @return  string
    */
   public function parse_src( $src ) {
     $shorthand = strpos( $src, ':' ) ? substr( $src, 0, strpos( $src, ':' ) ) : substr( $src, 0 );
 
-    // If the src is a name of any of the WordPress image sizes, update it
+    // If the src is a name of any of the WordPress image sizes, update it.
     if ( in_array( $shorthand, $this->image_sizes ) ) {
       $src = "placeholder:{$src}";
     }

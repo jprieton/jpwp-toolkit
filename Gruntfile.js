@@ -204,7 +204,7 @@ module.exports = function ( grunt ) {
     // PHP Code Sniffer.
     phpcs: {
       options: {
-        bin: 'vendor/bin/phpcs'
+        bin: './vendor/bin/phpcs'
       },
       dist: {
         src: [
@@ -236,6 +236,7 @@ module.exports = function ( grunt ) {
 
   // Load NPM tasks to be used here.
   grunt.loadNpmTasks( 'grunt-sass' );
+  grunt.loadNpmTasks( 'grunt-phpcs' );
   grunt.loadNpmTasks( 'grunt-rtlcss' );
   grunt.loadNpmTasks( 'grunt-postcss' );
   grunt.loadNpmTasks( 'grunt-stylelint' );

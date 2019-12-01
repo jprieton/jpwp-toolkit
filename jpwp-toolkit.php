@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Plugin Name:   JPWP Toolkit
  * Plugin URI:    https://github.com/jprieton/jpwp-toolkit
@@ -26,11 +25,12 @@
  * @package JPWPToolkit
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Define plugin constants
+ *
  * @since 0.1.0
  */
 define( 'JPWP_VERSION', '0.3.0' );
@@ -42,6 +42,7 @@ define( 'JPWP_ABSPATH', plugin_dir_path( JPWP_FILENAME ) . 'includes' );
 
 /**
  * Registering an autoload implementation
+ *
  * @since 0.1.0
  */
 spl_autoload_register( function( $class_name ) {
@@ -52,7 +53,7 @@ spl_autoload_register( function( $class_name ) {
   }
 
   $namespace = array_map( 'strtolower', $namespace );
-  
+
   if ( in_array( 'abstracts', $namespace ) ) {
     $class_filename = 'abstract-class-' . str_replace( '_', '-', end( $namespace ) );
     array_pop( $namespace );
@@ -75,8 +76,7 @@ spl_autoload_register( function( $class_name ) {
   if ( file_exists( $filename ) ) {
     require_once $filename;
   } else if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-
-    $backtrace = debug_backtrace();
+    $backtrace = debug_backtrace(); // phpcs:ignore
 
     foreach ( $backtrace as $info ) {
       if ( empty( $info['file'] ) || $info['function'] != 'spl_autoload_call' ) {
@@ -85,31 +85,32 @@ spl_autoload_register( function( $class_name ) {
       break;
     }
 
-    // development
-    var_dump( $class_name, $filename, $info['file'] );
+    // development.
+    var_dump( $class_name, $filename, $info['file'] );  // phpcs:ignore
     die;
   } else {
-    // translators: %s: class name 
-    wp_die( sprintf( __( "The class %s could not be loaded", 'jpwp-toolkit' ), "<b><code>{$class_name}</code></b>" ) );
+    // translators: %s: class name.
+    wp_die( sprintf( __( "The class %s could not be loaded", 'jpwp-toolkit' ), // phpcs:ignore
+                    "<b><code>{$class_name}</code></b>" ) );  // phpcs:ignore
   }
 } );
 
-// Load the plugin textdomain
+// Load the plugin textdomain.
 add_action( 'plugins_loaded', [ 'JPWPToolkit\Core\Textdomain', 'load_plugin_textdomain' ] );
 
 use JPWPToolkit\Core\Admin_Notice;
 use JPWPToolkit\Core\Init;
 
-// Check if the minimum requirements are met
+// Check if the minimum requirements are met.
 if ( version_compare( PHP_VERSION, '5.6.20', '<' ) ) {
 
-  // Show notice for minimum PHP version required for SourceFramework
+  // Show notice for minimum PHP version required for JPWP Toolkit.
   new Admin_Notice( __( 'JPWP Toolkit requires PHP version 5.6.20 or later.', 'jpwp-toolkit' ), [
       'type'        => 'error',
       'dismissible' => true,
           ] );
 } else {
 
-  // Initialize the plugin
+  // Initialize the plugin.
   Init::get_instance();
 }

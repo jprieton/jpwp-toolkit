@@ -1,20 +1,26 @@
 <?php
+/**
+ * Class to initialize the plugin
+ * 
+ * @package       JPWPToolkit
+ * @subpackage    Core
+ */
 
 namespace JPWPToolkit\Core;
 
-// Exit if accessed directly
+// Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-// Admin Pages
+// Admin Pages.
 use JPWPToolkit\Admin\Social_Network_Page;
-// Html::img() shorthands
+// Html::img() shorthands.
 use JPWPToolkit\Filters\Img_Pixel_Shorthand;
 use JPWPToolkit\Filters\Img_Placeholder_Shorthand;
 use JPWPToolkit\Filters\Img_Not_Available_Shorthand;
-// Form::options() shorthands
+// Form::options() shorthands.
 use JPWPToolkit\Filters\Options_Weekdays_Shorthand;
 use JPWPToolkit\Filters\Options_Months_Shorthand;
-// Plugin schedule tasks
+// Plugin schedule tasks.
 use JPWPToolkit\Core\Schedule_Events;
 
 /**
@@ -43,13 +49,13 @@ final class Init {
     // Add menu/submenu pages to admin panel's menu structure.
     $this->add_admin_pages();
 
-    // Add scheduled events
+    // Add scheduled events.
     $this->add_scheduled_events();
 
-    // Add image shorthands filters
+    // Add image shorthands filters.
     $this->add_image_shorthands();
 
-    // Add image shorthands filters
+    // Add image shorthands filters.
     $this->add_options_shorthands();
   }
 

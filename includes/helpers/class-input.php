@@ -2,7 +2,7 @@
 
 namespace JPWPToolkit\Helpers;
 
-// Exit if accessed directly
+// Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class Input {
 
-  private static function _get_value( $type, $field, $args, $default = '' ) {
+  private static function get_value( $type, $field, $args, $default = '' ) {
     $value = filter_input( $type, $field, $args['filter'], $args['options'] );
 
     if ( empty( $value ) ) {
@@ -25,7 +25,7 @@ class Input {
     }
 
     if ( !empty( $args['callback'] ) ) {
-      $value = self::_callback( $value, $args['callback'] );
+      $value = self::callback( $value, $args['callback'] );
     }
 
     return $value;
@@ -37,9 +37,9 @@ class Input {
    * @since     0.2.0
    * @see       http://php.net/manual/es/filter.filters.php
    * @see       https://developer.wordpress.org/reference/functions/sanitize_text_field/
-   * @param     string|array    $field
-   * @param     mixed           $default
-   * @param     array           $args
+   * @param     string|array $field
+   * @param     mixed        $default
+   * @param     array        $args
    * @return    mixed
    */
   public static function get( $field, $default = '', $args = [] ) {
@@ -55,7 +55,7 @@ class Input {
         $value[$_field] = self::get( $_field, $default, $args );
       }
     } else {
-      $value = self::_get_value( INPUT_GET, $field, $args, $default );
+      $value = self::get_value( INPUT_GET, $field, $args, $default );
     }
 
     return $value;
@@ -67,9 +67,9 @@ class Input {
    * @since     0.2.0
    * @see       http://php.net/manual/es/filter.filters.php
    * @see       https://developer.wordpress.org/reference/functions/sanitize_text_field/
-   * @param     string|array    $field
-   * @param     mixed           $default
-   * @param     array           $args
+   * @param     string|array $field
+   * @param     mixed        $default
+   * @param     array        $args
    * @return    mixed
    */
   public static function post( $field, $default = '', $args = [] ) {
@@ -85,7 +85,7 @@ class Input {
         $value[$_field] = self::post( $_field, $default, $args );
       }
     } else {
-      $value = self::_get_value( INPUT_POST, $field, $args, $default );
+      $value = self::get_value( INPUT_POST, $field, $args, $default );
     }
 
     return $value;
@@ -97,9 +97,9 @@ class Input {
    * @since     0.2.0
    * @see       http://php.net/manual/es/filter.filters.php
    * @see       https://developer.wordpress.org/reference/functions/sanitize_text_field/
-   * @param     string|array    $field
-   * @param     mixed           $default
-   * @param     array           $args
+   * @param     string|array $field
+   * @param     mixed        $default
+   * @param     array        $args
    * @return    mixed
    */
   public static function server( $field, $default = '', $args = [] ) {
@@ -115,7 +115,7 @@ class Input {
         $value['field'] = self::server( $_field, $default, $args );
       }
     } else {
-      $value = self::_get_value( INPUT_SERVER, $field, $args, $default );
+      $value = self::get_value( INPUT_SERVER, $field, $args, $default );
     }
 
     return $value;
@@ -127,9 +127,9 @@ class Input {
    * @since     0.2.0
    * @see       http://php.net/manual/es/filter.filters.php
    * @see       https://developer.wordpress.org/reference/functions/sanitize_text_field/
-   * @param     string|array    $field
-   * @param     mixed           $default
-   * @param     array           $args
+   * @param     string|array $field
+   * @param     mixed        $default
+   * @param     array        $args
    * @return    mixed
    */
   public static function cookie( $field, $default = '', $args = [] ) {
@@ -145,7 +145,7 @@ class Input {
         $value['field'] = self::cookie( $_field, $default, $args );
       }
     } else {
-      $value = self::_get_value( INPUT_COOKIE, $field, $args, $default );
+      $value = self::get_value( INPUT_COOKIE, $field, $args, $default );
     }
 
     return $value;
@@ -155,11 +155,11 @@ class Input {
    * Executes the filter callbacks
    *
    * @since     0.2.0
-   * @param     string    $value
-   * @param     array     $callable
+   * @param     string $value
+   * @param     array  $callable
    * @return    string
    */
-  private static function _callback( $value, $callable = [] ) {
+  private static function callback( $value, $callable = [] ) {
     foreach ( (array) $callable as $callback ) {
       if ( is_callable( $callback ) ) {
         $value = call_user_func( $callback, $value );
@@ -196,7 +196,7 @@ class Input {
    * Fetch User Agent string
    *
    * @since     0.2.0
-   * @return	string    User Agent string or empty if it doesn't exist
+   * @return	string    User Agent string or empty if it doesn't exist.
    */
   public function user_agent() {
     return self::server( 'HTTP_USER_AGENT' );
@@ -206,8 +206,8 @@ class Input {
    * Generate URL-encoded query string for method request
    *
    * @since     0.2.0
-   * @param     string      $method Request method
-   * @param     array       $override Overrides method query data
+   * @param     string $method Request method.
+   * @param     array  $override Overrides method query data.
    * @return    string
    */
   public function query_string( $method = 'get', $override = [] ) {
@@ -222,8 +222,8 @@ class Input {
    * @since   0.2.0
    * @see     https://codex.wordpress.org/WordPress_Nonces
    * @see     https://developer.wordpress.org/reference/functions/sanitize_text_field/
-   * @param   string    $key
-   * @param   string    $method
+   * @param   string $key
+   * @param   string $method
    * @return  string
    */
   public static function wpnonce( $key = '_wpnonce', $method = 'post' ) {
@@ -247,8 +247,8 @@ class Input {
    * @since   0.2.0
    * @see     https://codex.wordpress.org/WordPress_Nonces
    * @see     https://developer.wordpress.org/reference/functions/wp_verify_nonce/
-   * @param   string    $key
-   * @param   string    $method
+   * @param   string $key
+   * @param   string $method
    * @return  false|int           False if the nonce is invalid, 1 if the nonce is valid and generated
    *                              between 0-12 hours ago, 2 if the nonce is valid and generated between 12-24 hours ago.
    */

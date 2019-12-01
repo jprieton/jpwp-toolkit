@@ -1,4 +1,10 @@
 <?php
+/**
+ * Generate and enqueue notices to WordPress admin
+ * 
+ * @package        JPWPToolkit
+ * @subpackage     Core
+ */
 
 namespace JPWPToolkit\Core;
 
@@ -39,8 +45,8 @@ class Admin_Notice {
    * Creates and hook admin notice
    *
    * @since   0.1.0
-   * @param   string    $message
-   * @param   array     $attr
+   * @param   string $message The notice message.
+   * @param   array  $attr    attributes of the notice.
    */
   public function __construct( $message, $attr = [] ) {
     $defaults = [
@@ -75,7 +81,9 @@ class Admin_Notice {
       $this->class .= ' is-dismissible';
     }
 
-    $this->message = wpautop( make_clickable( $message ) );
+    $this->message = $message;
+
+    // enqueue notice.
     add_action( 'admin_notices', [ $this, 'show_admin_notice' ] );
   }
 
@@ -85,7 +93,11 @@ class Admin_Notice {
    * @since   0.1.0
    */
   public function show_admin_notice() {
-    printf( '<div class="%1$s">%2$s</div>', $this->class, $this->message );
+    $output = wpautop( make_clickable( $this->message ) );
+    $output = sprintf( '<div class="%1$s">%2$s</div>', esc_attr( $this->class ), $output );
+
+    // Show the notice.
+    echo $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
   }
 
 }

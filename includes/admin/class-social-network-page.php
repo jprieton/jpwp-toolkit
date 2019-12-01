@@ -1,8 +1,14 @@
 <?php
+/**
+ * Adds the capability of add and/or edit the social networks links
+ * 
+ * @package        JPWPToolkit
+ * @subpackage     Admin
+ */
 
 namespace JPWPToolkit\Admin;
 
-// Exit if accessed directly
+// Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
 use JPWPToolkit\Abstracts\Settings_Page;
@@ -24,7 +30,7 @@ final class Social_Network_Page extends Settings_Page {
    * @since 0.3.0
    */
   public function __construct() {
-    // Define the basis of the settings page
+    // Define the basis of the settings page.
     $this->option_page          = 'social_network_links';
     $this->option_group         = 'social_network_links';
     $this->option_name          = 'social_network_links';
@@ -32,10 +38,10 @@ final class Social_Network_Page extends Settings_Page {
 
     parent::__construct( 'options-general.php', $this->option_page );
 
-    // Adds the settings menu
+    // Adds the settings menu.
     add_action( 'admin_menu', [ $this, 'add_social_network_page' ] );
 
-    // Adds the settings section
+    // Adds the settings section.
     add_action( 'admin_init', [ $this, 'add_social_network_links_section' ] );
   }
 
@@ -70,10 +76,10 @@ final class Social_Network_Page extends Settings_Page {
         'youtube'   => 'YouTube',
     ];
 
-    // Filter to allow to plugins/themes add more social networks
+    // Filter to allow to plugins/themes add more social networks.
     $networks = apply_filters( 'jpwp_toolkit_social_network_links', $networks );
 
-    // Sort by label
+    // Sort by label.
     asort( $networks );
 
     foreach ( $networks as $key => $label ) {

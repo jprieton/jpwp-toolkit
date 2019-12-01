@@ -1,8 +1,15 @@
 <?php
+/**
+ * The Form class is a helper that provides a set of static methods for generating 
+ * commonly used HTML form tags.
+ * 
+ * @package       JPWPToolkit
+ * @subpackage    Helpers
+ */
 
 namespace JPWPToolkit\Helpers;
 
-// Exit if accessed directly
+// Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
 use JPWPToolkit\Helpers\Html;
@@ -29,8 +36,8 @@ class Form {
    *
    * @since 0.3.0
    *
-   * @param   string              $label
-   * @param   array|string        $attributes
+   * @param   string       $label      Text that will be placed inner label tag.
+   * @param   array|string $attributes An array of html attributes.
    * @return  string
    */
   public static function label( $label, $attributes = [] ) {
@@ -42,7 +49,7 @@ class Form {
    *
    * @since 0.3.0
    *
-   * @param   array|string        $attributes
+   * @param   array|string $attributes An array of html attributes.
    * @return  string
    */
   public static function input( $attributes = [] ) {
@@ -60,9 +67,8 @@ class Form {
    *
    * @since 0.3.0
    *
-   * @param   string              $name
-   * @param   string              $content
-   * @param   array|string        $attributes
+   * @param   string       $content    Content that will be placed inner textarea tag.
+   * @param   array|string $attributes An array of html attributes.
    * @return  string
    */
   public static function textarea( $content = '', $attributes = [] ) {
@@ -72,14 +78,13 @@ class Form {
   /**
    * Create a button element.
    *
-   * @param   string              $label
-   * @param   string              $type
-   * @param   type                $attributes
+   * @param   string       $label      A label for the button element.
+   * @param   array|string $attributes An array of html attributes.
    * @return  string
    */
-  public static function button( $label, $type = 'button', $attributes = [] ) {
+  public static function button( $label, $attributes = [] ) {
     $defaults   = [
-        'type' => $type,
+        'type' => 'button',
     ];
     $attributes = wp_parse_args( $attributes, $defaults );
 
@@ -91,14 +96,11 @@ class Form {
    *
    * @since 0.3.0
    *
-   * @param   string              $name
-   * @param   string              $value
-   * @param   array|string        $attributes
+   * @param   array|string $attributes An array of html attributes.
    * @return  string
    */
-  public static function hidden( $name, $value = '', $attributes = [] ) {
-    $type       = 'hidden';
-    $attributes = array_merge( $attributes, compact( 'name', 'value', 'type' ) );
+  public static function hidden( $attributes = [] ) {
+    $attributes = array_merge( $attributes, [ 'type' => 'hidden' ] );
     return self::input( $attributes );
   }
 
@@ -107,14 +109,11 @@ class Form {
    *
    * @since 0.3.0
    *
-   * @param   string              $name
-   * @param   string              $value
-   * @param   array|string        $attributes
+   * @param   array|string $attributes An array of html attributes.
    * @return  string
    */
-  public static function text( $name, $value = '', $attributes = [] ) {
-    $type       = 'text';
-    $attributes = array_merge( $attributes, compact( 'name', 'value', 'type' ) );
+  public static function text( $attributes = [] ) {
+    $attributes = array_merge( $attributes, [ 'type' => 'text' ] );
     return self::input( $attributes );
   }
 
@@ -123,14 +122,11 @@ class Form {
    *
    * @since 0.3.0
    *
-   * @param   string              $name
-   * @param   string              $value
-   * @param   array|string        $attributes
+   * @param   array|string $attributes An array of html attributes.
    * @return  string
    */
-  public static function email( $name, $value = '', $attributes = [] ) {
-    $type       = 'email';
-    $attributes = array_merge( $attributes, compact( 'name', 'value', 'type' ) );
+  public static function email( $attributes = [] ) {
+    $attributes = array_merge( $attributes, [ 'type' => 'email' ] );
     return self::input( $attributes );
   }
 
@@ -139,14 +135,11 @@ class Form {
    *
    * @since 0.3.0
    *
-   * @param   string              $name
-   * @param   string              $value
-   * @param   array|string        $attributes
+   * @param   array|string $attributes An array of html attributes.
    * @return  string
    */
-  public static function url( $name, $value = '', $attributes = [] ) {
-    $type       = 'url';
-    $attributes = array_merge( $attributes, compact( 'name', 'value', 'type' ) );
+  public static function url( $attributes = [] ) {
+    $attributes = array_merge( $attributes, [ 'type' => 'url' ] );
     return self::input( $attributes );
   }
 
@@ -155,13 +148,11 @@ class Form {
    *
    * @since 0.3.0
    *
-   * @param   string              $name
-   * @param   array|string        $attributes
+   * @param   array|string $attributes An array of html attributes.
    * @return  string
    */
-  public static function password( $name, $attributes = [] ) {
-    $type       = 'password';
-    $attributes = array_merge( $attributes, compact( 'name', 'type' ) );
+  public static function password( $attributes = [] ) {
+    $attributes = array_merge( $attributes, [ 'type' => 'password' ] );
     return self::input( $attributes );
   }
 
@@ -170,13 +161,11 @@ class Form {
    *
    * @since 0.3.0
    *
-   * @param   string              $name
-   * @param   array|string        $attributes
+   * @param   array|string $attributes An array of html attributes.
    * @return  string
    */
-  public static function file( $name, $attributes = [] ) {
-    $type       = 'file';
-    $attributes = array_merge( $attributes, compact( 'name', 'value', 'type' ) );
+  public static function file( $attributes = [] ) {
+    $attributes = array_merge( $attributes, [ 'type' => 'file' ] );
     return self::input( $attributes );
   }
 
@@ -185,9 +174,8 @@ class Form {
    *
    * @since 0.3.0
    *
-   * @param   string              $name
-   * @param   array|string        $options
-   * @param   array|string        $attributes
+   * @param   array|string $options    An key=>label array of options.
+   * @param   array|string $attributes An array of html attributes.
    * @return  string
    */
   public static function select( $options = [], $attributes = [] ) {
@@ -224,16 +212,16 @@ class Form {
   }
 
   /**
-   * Create a list of option tags from array .
+   * Create a list of option tags from array.
    *
    * @since 0.3.0
    *
-   * @param  array|string         $options
-   * @param  array                $selected
+   * @param  array|string $options    An key=>label array of options.
+   * @param  array        $selected   The value which will be marked as 'selected'.
    * @return string
    */
   public static function options( $options, $selected = '' ) {
-    // Filter to allow add shorthands
+    // Filter to allow add shorthands.
     $shorthands = apply_filters( 'jpwp_toolkit_helpers_form_options_shorthands', [] );
 
     if ( is_string( $options ) && in_array( $options, $shorthands ) ) {
@@ -243,7 +231,7 @@ class Form {
     $options = (array) apply_filters( 'jpwp_toolkit_helpers_form_options', $options );
 
     $html = '';
-    
+
     foreach ( $options as $key => $value ) {
       if ( is_array( $value ) ) {
         $html .= Html::optgroup( self::options( $value, $selected ), [ 'label' => $key ] );
@@ -252,10 +240,10 @@ class Form {
             'value'    => $key,
             'selected' => (!empty( $selected ) && $selected == $key),
         ];
-        $html   .= Html::option( $value, $attributes );
+        $html       .= Html::option( $value, $attributes );
       }
     }
-    
+
     return $html;
   }
 

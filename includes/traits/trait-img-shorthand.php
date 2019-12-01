@@ -1,8 +1,14 @@
 <?php
+/**
+ * Trait to add Img shorthand handlers
+ * 
+ * @package       JPWPToolkit
+ * @subpackage    Traits
+ */
 
 namespace JPWPToolkit\Traits;
 
-// Exit if accessed directly
+// Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -18,6 +24,8 @@ defined( 'ABSPATH' ) || exit;
 trait Img_Shorthand {
 
   /**
+   * Array with the WordPress image sizes
+   * 
    * @var     array List of image sizes.
    * @since   0.1.0
    */
@@ -33,11 +41,24 @@ trait Img_Shorthand {
       $this->image_sizes = get_intermediate_image_sizes();
     }
 
-    // Add shorthands keywords
-    add_filter( 'jpwp_toolkit_helpers_html_img_shorthands', [ $this, 'add_shorthand' ] );
+    // Add shorthands keywords.
+    add_filter( 'jpwp_toolkit_helpers_html_img_shorthand_handlers', [ $this, 'add_shorthand_handler' ] );
 
-    // add image shorthands filters
-    add_filter( "jpwp_toolkit_helpers_html_img_shorthand_{$this->name}", [ $this, 'parse_shorthand' ], 10, 2 );
+    // add image shorthands filters.
+    add_filter( "jpwp_toolkit_helpers_html_img_shorthand_{$this->handler}", [ $this, 'parse_shorthand' ], 10, 2 );
+  }
+
+  /**
+   * Adds the shorthand
+   * 
+   * @since   0.1.0
+   * 
+   * @param   array $handlers An array with the img shorthand handlers.
+   * @return  array
+   */
+  public function add_shorthand_handler( $handlers = [] ) {
+    $handlers[] = $this->handler;
+    return $handlers;
   }
 
 }

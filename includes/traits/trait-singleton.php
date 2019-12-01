@@ -1,8 +1,14 @@
 <?php
+/**
+ * Trait to create a singleton class
+ * 
+ * @package       JPWPToolkit
+ * @subpackage    Traits
+ */
 
 namespace JPWPToolkit\Traits;
 
-// Exit if accessed directly
+// Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -32,7 +38,7 @@ trait Singleton {
    */
   public static function get_instance() {
     if ( empty( self::$instance ) ) {
-      self::$instance = new self;
+      self::$instance = new self();
     }
     return self::$instance;
   }
@@ -60,8 +66,7 @@ trait Singleton {
    *
    * @since   0.1.0
    */
-  protected function __sleep() {
-    
+  protected function __sleep() { // phpcs:ignore PHPCompatibility.FunctionDeclarations.NonStaticMagicMethods.__sleepMethodVisibility
   }
 
   /**

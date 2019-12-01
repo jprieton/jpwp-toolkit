@@ -2,10 +2,9 @@
 
 namespace JPWPToolkit\Core;
 
-// Exit if accessed directly
+// Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-use JPWPToolkit\Helpers\Html;
 use JPWPToolkit\Helpers\Form;
 use JPWPToolkit\Core\Settings_Group;
 
@@ -23,7 +22,7 @@ class Settings_Group_Field extends Settings_Group {
    * Constructor
    *
    * @since   0.3.0
-   * @param string $setting_group Setting group name
+   * @param string $setting_group Setting group name.
    */
   public function __construct( $setting_group ) {
     parent::__construct( $setting_group );
@@ -34,7 +33,7 @@ class Settings_Group_Field extends Settings_Group {
    *
    * @since   0.3.0
    *
-   * @param   array          $field
+   * @param   array $field
    * @return  boolean
    */
   public function add_settings_field( $page, $section, $field ) {
@@ -77,14 +76,14 @@ class Settings_Group_Field extends Settings_Group {
    *
    * @since   0.3.0
    *
-   * @param   array          $field
+   * @param   array $field
    */
   public function render_input( $field ) {
     $desc          = '';
     $default_value = '';
 
     if ( array_key_exists( 'desc', $field ) ) {
-      $desc = $this->_parse_description( $field['desc'] );
+      $desc = $this->parse_description( $field['desc'] );
       unset( $field['desc'] );
     }
 
@@ -122,7 +121,7 @@ class Settings_Group_Field extends Settings_Group {
    *
    * @since   0.3.0
    *
-   * @param   array          $field
+   * @param   array $field
    */
   public function render_textarea( $field ) {
     $desc          = '';
@@ -131,7 +130,7 @@ class Settings_Group_Field extends Settings_Group {
     $raw           = false;
 
     if ( array_key_exists( 'desc', $field ) ) {
-      $desc = $this->_parse_description( $field['desc'] );
+      $desc = $this->parse_description( $field['desc'] );
       unset( $field['desc'] );
     }
 
@@ -177,7 +176,7 @@ class Settings_Group_Field extends Settings_Group {
    *
    * @since   0.5.0
    *
-   * @param   array          $field
+   * @param   array $field
    */
   public function render_checkbox( $field ) {
     echo '<fieldset>';
@@ -199,7 +198,7 @@ class Settings_Group_Field extends Settings_Group {
     ];
 
     if ( $is_multiple ) {
-      echo Form::hidden( sprintf( "{$this->setting_group_name}[%s][]", $field['id'] ), '' );
+      echo Form::hidden( [ 'name' => sprintf( "{$this->setting_group_name}[%s][]", $field['id'] ) ] );
     }
 
     foreach ( $options as $item ) {
@@ -221,7 +220,7 @@ class Settings_Group_Field extends Settings_Group {
       }
 
       if ( array_key_exists( 'desc', $item ) ) {
-        $desc = $this->_parse_description( $item['desc'] );
+        $desc = $this->parse_description( $item['desc'] );
         unset( $item['desc'] );
       } else {
         $desc = '<br />';
@@ -239,7 +238,7 @@ class Settings_Group_Field extends Settings_Group {
 
       $label = Form::label( $label, [ 'for' => $item['id'] ] );
       if ( !$is_multiple ) {
-        $input = Form::hidden( $item['name'], 'no' );
+        $input = Form::hidden( [ 'name' => $item['name'], 'value' => 'no' ] );
       } else {
         $input = '';
       }
@@ -249,7 +248,7 @@ class Settings_Group_Field extends Settings_Group {
     }
 
     if ( array_key_exists( 'desc', $field ) ) {
-      $desc = $this->_parse_description( $field['desc'] );
+      $desc = $this->parse_description( $field['desc'] );
       unset( $field['desc'] );
       echo $desc;
     }
@@ -261,7 +260,7 @@ class Settings_Group_Field extends Settings_Group {
    *
    * @since   0.3.0
    *
-   * @param   array          $field
+   * @param   array $field
    */
   public function render_select( $field ) {
     $defaults = [
@@ -276,7 +275,7 @@ class Settings_Group_Field extends Settings_Group {
     unset( $field['type'] );
 
     if ( array_key_exists( 'desc', $field ) ) {
-      $desc = $this->_parse_description( $field['desc'] );
+      $desc = $this->parse_description( $field['desc'] );
       unset( $field['desc'] );
     } else {
       $desc = '';
@@ -313,10 +312,10 @@ class Settings_Group_Field extends Settings_Group {
    *
    * @since     0.3.0
    *
-   * @param     string    $description
+   * @param     string $description
    * @return    string
    */
-  private function _parse_description( $description ) {
+  private function parse_description( $description ) {
     $description = apply_filters( 'the_content', trim( $description ) );
     $description = str_replace( '<p>', '<p class="description">', $description );
     return $description;

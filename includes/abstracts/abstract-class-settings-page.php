@@ -2,7 +2,7 @@
 
 namespace JPWPToolkit\Abstracts;
 
-// Exit if accessed directly
+// Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
 use JPWPToolkit\Helpers\Html;
@@ -19,6 +19,7 @@ abstract class Settings_Page {
 
   /**
    * Page title
+   *
    * @since   0.3.0
    * @var     string
    */
@@ -26,6 +27,7 @@ abstract class Settings_Page {
 
   /**
    * Page description
+   *
    * @since   0.3.0
    * @var     string
    */
@@ -33,6 +35,7 @@ abstract class Settings_Page {
 
   /**
    * Option name
+   *
    * @since   0.3.0
    * @var     string
    */
@@ -40,6 +43,7 @@ abstract class Settings_Page {
 
   /**
    * Option group
+   *
    * @since   0.3.0
    * @var     string
    */
@@ -47,6 +51,7 @@ abstract class Settings_Page {
 
   /**
    * Option page
+   *
    * @since   0.3.0
    * @var     string
    */
@@ -54,6 +59,7 @@ abstract class Settings_Page {
 
   /**
    * Page menu slug
+   *
    * @since   0.3.0
    * @var     string
    */
@@ -61,6 +67,7 @@ abstract class Settings_Page {
 
   /**
    * Page submenu slug
+   *
    * @since   0.3.0
    * @var     string
    */
@@ -68,6 +75,7 @@ abstract class Settings_Page {
 
   /**
    * Stores the Settings_Group_Field object
+   *
    * @var Settings_Group_Field
    * @since 0.3.0
    */
@@ -75,6 +83,7 @@ abstract class Settings_Page {
 
   /**
    * Array of setting sections in current page
+   *
    * @since   0.3.0
    * @var     array
    */
@@ -85,8 +94,8 @@ abstract class Settings_Page {
    *
    * @since   0.3.0
    *
-   * @param   string      $menu_slug
-   * @param   string      $submenu_slug
+   * @param   string $menu_slug
+   * @param   string $submenu_slug
    */
   public function __construct( $menu_slug = '', $submenu_slug = '' ) {
     $this->menu_slug    = $menu_slug ?: $this->menu_slug;
@@ -101,11 +110,11 @@ abstract class Settings_Page {
    *
    * @since   0.3.0
    *
-   * @param   string      $page_title
-   * @param   string      $menu_title
-   * @param   string      $capability
-   * @param   string      $icon_url
-   * @param   int         $position
+   * @param   string $page_title
+   * @param   string $menu_title
+   * @param   string $capability
+   * @param   string $icon_url
+   * @param   int    $position
    */
   public function add_menu_page( $page_title, $menu_title, $capability, $icon_url = 'dashicons-admin-generic', $position = null ) {
     $this->page_title = $page_title;
@@ -117,9 +126,9 @@ abstract class Settings_Page {
    *
    * @since   0.3.0
    *
-   * @param   string      $page_title
-   * @param   string      $menu_title
-   * @param   string      $capability
+   * @param   string $page_title
+   * @param   string $menu_title
+   * @param   string $capability
    */
   public function add_submenu_page( $page_title, $menu_title, $capability ) {
     $this->page_title = $page_title;
@@ -131,8 +140,8 @@ abstract class Settings_Page {
    *
    * @since   0.3.0
    *
-   * @param   string         $id
-   * @param   string         $title
+   * @param   string $id
+   * @param   string $title
    */
   public function add_settings_section( $id, $title = '' ) {
     $this->sections[] = $id;
@@ -152,7 +161,7 @@ abstract class Settings_Page {
       echo Html::h2( $this->page_title );
 
       if ( !empty( $this->page_description ) ) {
-        echo apply_filters( 'the_content', $this->page_description );
+        echo apply_filters( 'the_content', $this->page_description ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
       }
 
       global $wp_settings_sections;

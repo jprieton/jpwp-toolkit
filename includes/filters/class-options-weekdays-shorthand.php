@@ -1,8 +1,14 @@
 <?php
+/**
+ * Add the weekdays to the options handler
+ * 
+ * @package       JPWPToolkit
+ * @subpackage    Filters
+ */
 
 namespace JPWPToolkit\Filters;
 
-// Exit if accessed directly
+// Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
 use JPWPToolkit\Interfaces\Options_Shorthand as Interface_Options_Shorthand;
@@ -25,22 +31,24 @@ class Options_Weekdays_Shorthand implements Interface_Options_Shorthand {
   use \JPWPToolkit\Traits\Options_Shorthand;
 
   /**
-   * @var     string Shorthand name
+   * The options handler name
+   * 
+   * @var     string
    * @since   0.3.0
    */
-  private $name = 'weekdays';
+  private $handler = 'weekdays';
 
   /**
-   * Adds the shorthand
+   * Adds the shorthand handler
    * 
-   * @since   0.3.0
+   * @since   0.1.0
    * 
-   * @param   array $shorthands
+   * @param   array $handlers An array with the options shorthand handlers.
    * @return  array
    */
-  public function add_shorthand( $shorthands = [] ) {
-    $shorthands[] = $this->name;
-    return $shorthands;
+  public function add_shorthand_handler( $handlers = [] ) {
+    $handlers[] = $this->handler;
+    return $handlers;
   }
 
   /**
@@ -50,11 +58,11 @@ class Options_Weekdays_Shorthand implements Interface_Options_Shorthand {
    *
    * @global  WP_Locale   $wp_locale
    * 
-   * @param   string      $options
+   * @param   string $options The options handler.
    */
   public function parse_shorthand( $options ) {
     global $wp_locale;
-    
+
     $options = $wp_locale->weekday;
 
     return $options;

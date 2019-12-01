@@ -2,7 +2,7 @@
 
 namespace JPWPToolkit\Core;
 
-// Exit if accessed directly
+// Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -35,7 +35,7 @@ class Settings_Group {
    * Class constructor
    *
    * @since   0.3.0
-   * @param   string    $setting_group    Setting group option name
+   * @param   string $setting_group    Setting group option name.
    */
   public function __construct( $setting_group ) {
     $this->setting_group_name = trim( $setting_group );
@@ -47,8 +47,8 @@ class Settings_Group {
    * Set option value in group option
    *
    * @since   0.3.0
-   * @param   string    $option   Name of option to set. Expected to not be SQL-escaped.
-   * @param   mixed     $value    Option value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+   * @param   string $option   Name of option to set. Expected to not be SQL-escaped.
+   * @param   mixed  $value    Option value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
    * @return  bool
    */
   public function set_option( $option, $value ) {
@@ -60,8 +60,8 @@ class Settings_Group {
    * Get option value in option group.
    *
    * @since   0.3.0
-   * @param   string    $option     Name of option to retrieve. Expected to not be SQL-escaped.
-   * @param   mixed     $default    Optional. Default value to return if the option does not exist.
+   * @param   string $option     Name of option to retrieve. Expected to not be SQL-escaped.
+   * @param   mixed  $default    Optional. Default value to return if the option does not exist.
    * @return  mixed
    */
   public function get_option( $option, $default = false ) {
@@ -73,8 +73,8 @@ class Settings_Group {
    * Get boolean option value in option group.
    *
    * @since   0.3.0
-   * @param   string    $option     Name of option to retrieve. Expected to not be SQL-escaped.
-   * @param   boolean   $default    Optional. Default value to return if the option does not exist.
+   * @param   string  $option     Name of option to retrieve. Expected to not be SQL-escaped.
+   * @param   boolean $default    Optional. Default value to return if the option does not exist.
    * @return  boolean
    */
   public function get_bool_option( $option, $default = false ) {
@@ -86,8 +86,8 @@ class Settings_Group {
    * Get integer option value in option group.
    *
    * @since   0.3.0
-   * @param   string    $option     Name of option to retrieve. Expected to not be SQL-escaped.
-   * @param   int       $default    Optional. Default value to return if the option does not exist.
+   * @param   string $option     Name of option to retrieve. Expected to not be SQL-escaped.
+   * @param   int    $default    Optional. Default value to return if the option does not exist.
    * @return  int
    */
   public function get_int_option( $option, $default = 0 ) {
@@ -99,8 +99,8 @@ class Settings_Group {
    * Get absolute integer option value in option group.
    *
    * @since   2.0.0
-   * @param   string    $option     Name of option to retrieve. Expected to not be SQL-escaped.
-   * @param   int       $default    Optional. Default value to return if the option does not exist.
+   * @param   string $option     Name of option to retrieve. Expected to not be SQL-escaped.
+   * @param   int    $default    Optional. Default value to return if the option does not exist.
    * @return  int
    */
   public function get_absint_option( $option, $default = 0 ) {
@@ -112,8 +112,8 @@ class Settings_Group {
    * Get absolute numeric option value in option group.
    *
    * @since   2.0.0
-   * @param   string      $option     Name of option to retrieve. Expected to not be SQL-escaped.
-   * @param   int|float   $default    Optional. Default value to return if the option does not exist.
+   * @param   string    $option     Name of option to retrieve. Expected to not be SQL-escaped.
+   * @param   int|float $default    Optional. Default value to return if the option does not exist.
    * @return  int|float
    */
   public function get_abs_option( $option, $default = 0 ) {
@@ -125,8 +125,8 @@ class Settings_Group {
    * Get float option value in option group.
    *
    * @since   2.0.0
-   * @param   string    $option     Name of option to retrieve. Expected to not be SQL-escaped.
-   * @param   int       $default    Optional. Default value to return if the option does not exist.
+   * @param   string $option     Name of option to retrieve. Expected to not be SQL-escaped.
+   * @param   int    $default    Optional. Default value to return if the option does not exist.
    * @return  int
    */
   public function get_float_option( $option, $default = 0 ) {
@@ -138,7 +138,7 @@ class Settings_Group {
    * Merge options before saving
    *
    * @since   0.3.0
-   * @param   array     $new_value
+   * @param   array $new_value  New value of the option.
    * @return  array
    */
   public function pre_update_option( $new_value ) {
@@ -150,7 +150,7 @@ class Settings_Group {
 
     foreach ( $this->options as $key => $value ) {
       if ( is_array( $value ) ) {
-        $this->options[$key] = $this->_clean_options( $value );
+        $this->options[$key] = $this->clean_options( $value );
       }
 
       if ( empty( $value ) || $value == '_unset_' ) {
@@ -174,13 +174,13 @@ class Settings_Group {
    * Clean empty or _unset_ options
    *
    * @since   0.3.0
-   * @param   array     $new_value
+   * @param   array $new_value  New value of the option.
    * @return  array
    */
-  private function _clean_options( $new_value ) {
+  private function clean_options( $new_value ) {
     foreach ( $new_value as $key => $value ) {
       if ( is_array( $value ) ) {
-        $new_value[$key] = $this->_clean_options( $value );
+        $new_value[$key] = $this->clean_options( $value );
       }
 
       if ( empty( $value ) || $value == '_unset_' ) {

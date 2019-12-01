@@ -1,8 +1,14 @@
 <?php
+/**
+ * Load the plugin texdomain
+ * 
+ * @package        JPWPToolkit
+ * @subpackage     Core
+ */
 
 namespace JPWPToolkit\Core;
 
-// Exit if accessed directly
+// Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -21,7 +27,7 @@ class Textdomain {
    * @since     1.1.0
    */
   public static function load_plugin_textdomain() {
-    load_plugin_textdomain( 'jpwp-toolkit', FALSE, basename( dirname( JPWP_BASENAME ) ) . '/languages/' );
+    load_plugin_textdomain( 'jpwp-toolkit', false, basename( dirname( JPWP_BASENAME ) ) . '/languages/' );
   }
 
 }

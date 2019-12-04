@@ -84,6 +84,11 @@ class HtmlTest extends WP_UnitTestCase {
       $this->assertEquals( $result, Html::tag( $tag, 'Arbitray content' ) );
     }
 
+    $this->assertEquals( Html::tag( 'div', null ), '<div></div>' );
+    $this->assertEquals( Html::tag( 'div', false ), '<div></div>' );
+    $this->assertEquals( Html::tag( 'div', true ), '<div>1</div>' );
+
+
     // Not add attributes.
     foreach ( $set2 as $tag => $result ) {
       $this->assertEquals( $result, Html::tag( $tag, 'Arbitray content', $this->empty_attributes ) );
@@ -257,6 +262,10 @@ class HtmlTest extends WP_UnitTestCase {
     // Test with content with attributes.
     $this->assertEquals( Html::br( 'Arbitray content', $this->testing_attr ), '<br class="test-class" id="test-id" numeric-attr empty-attr />' );
     $this->assertEquals( Html::div( 'Arbitray content', $this->testing_attr ), '<div class="test-class" id="test-id" numeric-attr empty-attr>Arbitray content</div>' );
+
+    $this->assertEquals( Html::div( null ), '<div></div>' );
+    $this->assertEquals( Html::div( false ), '<div></div>' );
+    $this->assertEquals( Html::div( true ), '<div>1</div>' );
   }
 
   /**

@@ -1,5 +1,15 @@
 <?php
+/**
+ * Testing core setup
+ * 
+ * @package JPWPToolkit/Tests
+ */
 
+/**
+ * Testing core setup
+ * 
+ * @since 0.3.0
+ */
 class CoreTest extends WP_UnitTestCase {
 
   /**

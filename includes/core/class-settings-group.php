@@ -1,4 +1,10 @@
 <?php
+/**
+ * Allow add a group of settings
+ * 
+ * @package        JPWPToolkit
+ * @subpackage     Core
+ */
 
 namespace JPWPToolkit\Core;
 
@@ -8,8 +14,6 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Settings_Group class
  *
- * @package        JPWPToolkit
- * @subpackage     Core
  * @since          0.3.0
  * @author         Javier Prieto
  */

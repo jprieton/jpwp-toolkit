@@ -61,30 +61,60 @@ class FormTest extends WP_UnitTestCase {
    * Test Form::label() method
    */
   public function test_label() {
-    // Simple
+    // Simple.
     $this->assertEquals( '<label></label>', Form::label( '' ) );
     $this->assertEquals( '<label>Arbitray content</label>', Form::label( 'Arbitray content' ) );
 
-    // Empty values generates an empty label
+    // Empty values generates an empty label.
     $this->assertEquals( '<label></label>', Form::label( null ) );
     $this->assertEquals( '<label></label>', Form::label( false ) );
 
-    // True is converted to integer
+    // True is converted to integer.
     $this->assertEquals( '<label>1</label>', Form::label( true ) );
 
     // Test with content and attributes.
     $this->assertEquals( '<label class="test-class" id="test-id" numeric-attr empty-attr>Arbitray content</label>',
             Form::label( 'Arbitray content', $this->testing_attr ) );
 
-    // Empty values generates an empty label
+    // Empty values generates an empty label.
     $this->assertEquals( '<label class="test-class" id="test-id" numeric-attr empty-attr></label>',
             Form::label( null, $this->testing_attr ) );
     $this->assertEquals( '<label class="test-class" id="test-id" numeric-attr empty-attr></label>',
             Form::label( false, $this->testing_attr ) );
 
-    // True is converted to integer
+    // True is converted to integer.
     $this->assertEquals( '<label class="test-class" id="test-id" numeric-attr empty-attr>1</label>',
             Form::label( true, $this->testing_attr ) );
+  }
+
+  /**
+   * Test Form::button();
+   */
+  public function test_button() {
+    // Simple.
+    $this->assertEquals( '<button type="button"></button>', Form::button( '' ) );
+    $this->assertEquals( '<button type="button">Arbitray content</button>', Form::button( 'Arbitray content' ) );
+
+    // Empty values generates an empty button.
+    $this->assertEquals( '<button type="button"></button>', Form::button( null ) );
+    $this->assertEquals( '<button type="button"></button>', Form::button( false ) );
+
+    // True is converted to integer.
+    $this->assertEquals( '<button type="button">1</button>', Form::button( true ) );
+
+    // Test with content and attributes.
+    $this->assertEquals( '<button type="button" class="test-class" id="test-id" numeric-attr empty-attr>Arbitray content</button>',
+            Form::button( 'Arbitray content', $this->testing_attr ) );
+
+    // Empty values generates an empty button.
+    $this->assertEquals( '<button type="button" class="test-class" id="test-id" numeric-attr empty-attr></button>',
+            Form::button( null, $this->testing_attr ) );
+    $this->assertEquals( '<button type="button" class="test-class" id="test-id" numeric-attr empty-attr></button>',
+            Form::button( false, $this->testing_attr ) );
+
+    // True is converted to integer.
+    $this->assertEquals( '<button type="button" class="test-class" id="test-id" numeric-attr empty-attr>1</button>',
+            Form::button( true, $this->testing_attr ) );
   }
 
 }

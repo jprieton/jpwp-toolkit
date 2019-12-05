@@ -1,4 +1,10 @@
 <?php
+/**
+ * Helper to manage POST, GET requests
+ * 
+ * @package        JPWPToolkit
+ * @subpackage     Helpers
+ */
 
 namespace JPWPToolkit\Helpers;
 
@@ -10,8 +16,6 @@ defined( 'ABSPATH' ) || exit;
  *
  * Access form data (POST, GET, SERVER, COOKIE)
  *
- * @package        JPWPToolkit
- * @subpackage     Data
  * @since          0.2.0
  * @author         Javier Prieto
  */
@@ -210,51 +214,10 @@ class Input {
    * @param     array  $override Overrides method query data.
    * @return    string
    */
-  public function query_string( $method = 'get', $override = [] ) {
+  public function query_string( $method = 'GET', $override = [] ) {
     $method     = '_' . strtoupper( $method );
     $query_data = wp_parse_args( $override, ${$method} );
     return http_build_query( $query_data );
-  }
-
-  /**
-   * Return a nonce value
-   *
-   * @since   0.2.0
-   * @see     https://codex.wordpress.org/WordPress_Nonces
-   * @see     https://developer.wordpress.org/reference/functions/sanitize_text_field/
-   * @param   string $key
-   * @param   string $method
-   * @return  string
-   */
-  public static function wpnonce( $key = '_wpnonce', $method = 'post' ) {
-    $nonce_value = '';
-    switch ( strtolower( $method ) ) {
-      case 'get':
-        $nonce_value = static::get( $key );
-        break;
-      case 'post':
-      default:
-        $nonce_value = static::post( $key );
-        break;
-    }
-
-    return $nonce_value;
-  }
-
-  /**
-   * Verify that correct nonce was used with in time limit.
-   *
-   * @since   0.2.0
-   * @see     https://codex.wordpress.org/WordPress_Nonces
-   * @see     https://developer.wordpress.org/reference/functions/wp_verify_nonce/
-   * @param   string $key
-   * @param   string $method
-   * @return  false|int           False if the nonce is invalid, 1 if the nonce is valid and generated
-   *                              between 0-12 hours ago, 2 if the nonce is valid and generated between 12-24 hours ago.
-   */
-  public static function verify_wpnonce( $key = '_wpnonce', $action = -1, $method = 'post' ) {
-    $nonce_value = static::wpnonce( $key, $method );
-    return wp_verify_nonce( $nonce_value, $action );
   }
 
 }

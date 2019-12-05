@@ -1,4 +1,10 @@
 <?php
+/**
+ * Abstract class to add setting pages/sections
+ *
+ * @package       JPWPToolkit
+ * @subpackage    Abstracts
+ */
 
 namespace JPWPToolkit\Abstracts;
 
@@ -10,8 +16,6 @@ use JPWPToolkit\Helpers\Html;
 /**
  * Settings_Page abstract class
  *
- * @package       JPWPToolkit
- * @subpackage    Abstracts
  * @since         0.3.0
  * @author        Javier Prieto
  */
@@ -140,8 +144,8 @@ abstract class Settings_Page {
    *
    * @since   0.3.0
    *
-   * @param   string $id
-   * @param   string $title
+   * @param   string $id ID of the section.
+   * @param   string $title Title of the section.
    */
   public function add_settings_section( $id, $title = '' ) {
     $this->sections[] = $id;
@@ -161,7 +165,7 @@ abstract class Settings_Page {
       echo Html::h2( $this->page_title );
 
       if ( !empty( $this->page_description ) ) {
-        echo apply_filters( 'the_content', $this->page_description ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo apply_filters( 'the_content', $this->page_description ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped,WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
       }
 
       global $wp_settings_sections;

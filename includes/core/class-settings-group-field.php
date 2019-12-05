@@ -19,22 +19,11 @@ use JPWPToolkit\Core\Settings_Group;
 class Settings_Group_Field extends Settings_Group {
 
   /**
-   * Constructor
-   *
-   * @since   0.3.0
-   * @param string $setting_group Setting group name.
-   */
-  public function __construct( $setting_group ) {
-    parent::__construct( $setting_group );
-  }
-
-  /**
    * Add field to section
    *
    * @since   0.3.0
    *
    * @param   array $field
-   * @return  boolean
    */
   public function add_settings_field( $page, $section, $field ) {
     $defaults = [
@@ -113,7 +102,7 @@ class Settings_Group_Field extends Settings_Group {
     $attributes = wp_parse_args( $field, $defaults );
     $input      = Form::input( $attributes );
 
-    echo $input . $desc;
+    echo $input . $desc; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
   }
 
   /**
@@ -168,7 +157,7 @@ class Settings_Group_Field extends Settings_Group {
     $attributes = wp_parse_args( $field, $defaults );
     $input      = Form::textarea( $value, $attributes );
 
-    echo $input . $desc;
+    echo $input . $desc; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
   }
 
   /**
@@ -244,13 +233,13 @@ class Settings_Group_Field extends Settings_Group {
       }
       $input .= Form::input( $item );
 
-      echo sprintf( $label, $input ) . $desc;
+      echo sprintf( $label, $input ) . $desc; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
     }
 
     if ( array_key_exists( 'desc', $field ) ) {
       $desc = $this->parse_description( $field['desc'] );
       unset( $field['desc'] );
-      echo $desc;
+      echo $desc; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
     }
     echo '</fieldset>';
   }
@@ -304,7 +293,7 @@ class Settings_Group_Field extends Settings_Group {
     $options = $field['options'];
     unset( $field['options'] );
 
-    echo Form::select( $field, $options ) . $desc;
+    echo Form::select( $field, $options ) . $desc; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
   }
 
   /**
@@ -312,11 +301,11 @@ class Settings_Group_Field extends Settings_Group {
    *
    * @since     0.3.0
    *
-   * @param     string $description
+   * @param     string $description Description of the field.
    * @return    string
    */
   private function parse_description( $description ) {
-    $description = apply_filters( 'the_content', trim( $description ) );
+    $description = apply_filters( 'the_content', trim( $description ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
     $description = str_replace( '<p>', '<p class="description">', $description );
     return $description;
   }

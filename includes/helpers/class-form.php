@@ -1,8 +1,8 @@
 <?php
 /**
- * The Form class is a helper that provides a set of static methods for generating 
+ * The Form class is a helper that provides a set of static methods for generating
  * commonly used HTML form tags.
- * 
+ *
  * @package       JPWPToolkit
  * @subpackage    Helpers
  */
@@ -13,7 +13,6 @@ namespace JPWPToolkit\Helpers;
 defined( 'ABSPATH' ) || exit;
 
 use JPWPToolkit\Helpers\Html;
-use WP_Locale;
 
 /**
  * Form class
@@ -88,7 +87,7 @@ class Form {
     ];
     $attributes = wp_parse_args( $attributes, $defaults );
 
-    return Html::button( 'button', $label, $attributes );
+    return Html::button( $label, $attributes );
   }
 
   /**
@@ -236,15 +235,35 @@ class Form {
       if ( is_array( $value ) ) {
         $html .= Html::optgroup( self::options( $value, $selected ), [ 'label' => $key ] );
       } else {
-        $attributes = [
-            'value'    => $key,
-            'selected' => (!empty( $selected ) && $selected == $key),
-        ];
-        $html       .= Html::option( $value, $attributes );
+        $html .= self::option($key, $value, $selected);
       }
     }
 
     return $html;
+  }
+
+  /**
+   * Generates an option tag
+   *
+   * @since 0.3.0
+   *
+   * @param mixed  $value The value of the option.
+   * @param string $label The label of the option.
+   * @param mixed  $selected This will be compared with $values and adds the selected attribute.
+   * @return string
+   */
+  public function option( $value = '', $label = '', $selected = false ) {
+    if ( empty( $label ) ) {
+      $label = $value;
+    }
+
+    $attributes = [
+        'value'    => $value,
+        'selected' => (!empty( $selected ) && $selected == $value),
+    ];
+    $option     = Html::option( $label, $attributes );
+
+    return $option;
   }
 
 }

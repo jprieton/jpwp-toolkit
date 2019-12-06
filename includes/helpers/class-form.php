@@ -235,7 +235,7 @@ class Form {
       if ( is_array( $value ) ) {
         $html .= Html::optgroup( self::options( $value, $selected ), [ 'label' => $key ] );
       } else {
-        $html .= self::option($key, $value, $selected);
+        $html .= self::option( $key, $value, $selected );
       }
     }
 
@@ -243,25 +243,31 @@ class Form {
   }
 
   /**
-   * Generates an option tag
+   * Generates a single option tag
    *
    * @since 0.3.0
    *
-   * @param mixed  $value The value of the option.
-   * @param string $label The label of the option.
-   * @param mixed  $selected This will be compared with $values and adds the selected attribute.
-   * @return string
+   * @param   string  $label The label of the option.
+   * @param   array   $attr An array of HTML attributes.
+   * @return  string
    */
-  public function option( $value = '', $label = '', $selected = false ) {
+  public static function option( $label = '', $attr = [] ) {
     if ( empty( $label ) ) {
-      $label = $value;
+      return '';
     }
 
-    $attributes = [
-        'value'    => $value,
-        'selected' => (!empty( $selected ) && $selected == $value),
-    ];
-    $option     = Html::option( $label, $attributes );
+    if ( !isset( $attr['value'] ) ) {
+      $attr['value'] = $label;
+    }
+
+    if ( isset( $attr['selected'] ) ) {
+      $attr['selected'] = ($attr['selected'] === true) ?:
+              ( (string) $attr['selected'] === (string) $attr['value'] );
+    } else {
+      $attr['selected'] = false;
+    }
+
+    $option = Html::option( $label, $attr );
 
     return $option;
   }

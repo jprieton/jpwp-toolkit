@@ -28,9 +28,9 @@ class HtmlTest extends WP_UnitTestCase {
       'id'         => 'test-id',
       'boolean-attr',
       'empty-attr' => '',
+      'true-attr'  => true, // same as boolean attribute.
       'false-attr' => false, // must be hidden.
-      'empty-attr' => null,
-      0            => 'numeric-attr',
+      'null-attr'  => null, // must be hidden.
   ];
 
   /**
@@ -101,8 +101,8 @@ class HtmlTest extends WP_UnitTestCase {
 
     // Test with content and attributes.
     $set3 = [
-        'div' => '<div class="test-class" id="test-id" numeric-attr empty-attr>Arbitray content</div>',
-        'br'  => '<br class="test-class" id="test-id" numeric-attr empty-attr />',
+        'div' => '<div class="test-class" id="test-id" boolean-attr empty-attr="" true-attr>Arbitray content</div>',
+        'br'  => '<br class="test-class" id="test-id" boolean-attr empty-attr="" true-attr />',
     ];
     foreach ( $set3 as $tag => $result ) {
       $this->assertEquals( $result, Html::tag( $tag, 'Arbitray content', $this->testing_attr ) );
@@ -127,7 +127,7 @@ class HtmlTest extends WP_UnitTestCase {
     $this->assertEquals( '<img src="http://path/to/image.jpg" />', Html::img( 'http://path/to/image.jpg' ) );
 
     // With a valid src and attributes.
-    $this->assertEquals( '<img src="http://path/to/image.jpg" class="test-class" id="test-id" numeric-attr empty-attr />', Html::img( 'http://path/to/image.jpg', $this->testing_attr ) );
+    $this->assertEquals( '<img src="http://path/to/image.jpg" class="test-class" id="test-id" boolean-attr empty-attr="" true-attr />', Html::img( 'http://path/to/image.jpg', $this->testing_attr ) );
   }
 
   /**
@@ -145,8 +145,8 @@ class HtmlTest extends WP_UnitTestCase {
 
     // Test with attributes.
     $set1 = [
-        'div' => '<div class="test-class" id="test-id" numeric-attr empty-attr>',
-        'br'  => '<br class="test-class" id="test-id" numeric-attr empty-attr />',
+        'div' => '<div class="test-class" id="test-id" boolean-attr empty-attr="" true-attr>',
+        'br'  => '<br class="test-class" id="test-id" boolean-attr empty-attr="" true-attr />',
     ];
     foreach ( $set1 as $tag => $expected ) {
       $this->assertEquals( $expected, Html::open( $tag, $this->testing_attr ) );
@@ -207,7 +207,10 @@ class HtmlTest extends WP_UnitTestCase {
    */
   public function test_parse_attributes() {
     // With testing attributes.
-    $this->assertEquals( 'class="test-class" id="test-id" numeric-attr empty-attr', Html::parse_attributes( $this->testing_attr ) );
+    $this->assertEquals(
+            Html::parse_attributes( $this->testing_attr ),
+            'class="test-class" id="test-id" boolean-attr empty-attr="" true-attr'
+    );
 
     // With empty values.
     $this->assertEquals( '', Html::parse_attributes( $this->empty_values ) );
@@ -227,24 +230,54 @@ class HtmlTest extends WP_UnitTestCase {
     ];
 
     // Test simple lists.
-    $this->assertEquals( Html::ul( $simple_list ), '<ul><li>red</li><li>blue</li><li>green</li><li>yellow</li></ul>' );
-    $this->assertEquals( Html::ol( $simple_list ), '<ol><li>red</li><li>blue</li><li>green</li><li>yellow</li></ol>' );
+    $this->assertEquals(
+            '<ul><li>red</li><li>blue</li><li>green</li><li>yellow</li></ul>',
+            Html::ul( $simple_list )
+    );
+    $this->assertEquals(
+            '<ol><li>red</li><li>blue</li><li>green</li><li>yellow</li></ol>',
+            Html::ol( $simple_list )
+    );
 
     // Test simple lists with empty values as attributes.
-    $this->assertEquals( Html::ul( $simple_list, $this->empty_values ), '<ul><li>red</li><li>blue</li><li>green</li><li>yellow</li></ul>' );
-    $this->assertEquals( Html::ol( $simple_list, $this->empty_values ), '<ol><li>red</li><li>blue</li><li>green</li><li>yellow</li></ol>' );
+    $this->assertEquals(
+            '<ul><li>red</li><li>blue</li><li>green</li><li>yellow</li></ul>',
+            Html::ul( $simple_list, $this->empty_values )
+    );
+    $this->assertEquals(
+            '<ol><li>red</li><li>blue</li><li>green</li><li>yellow</li></ol>',
+            Html::ol( $simple_list, $this->empty_values )
+    );
 
     // Test simple lists with empty attributes.
-    $this->assertEquals( Html::ul( $simple_list, $this->empty_attributes ), '<ul><li>red</li><li>blue</li><li>green</li><li>yellow</li></ul>' );
-    $this->assertEquals( Html::ol( $simple_list, $this->empty_attributes ), '<ol><li>red</li><li>blue</li><li>green</li><li>yellow</li></ol>' );
+    $this->assertEquals(
+            '<ul><li>red</li><li>blue</li><li>green</li><li>yellow</li></ul>',
+            Html::ul( $simple_list, $this->empty_attributes )
+    );
+    $this->assertEquals(
+            Html::ol( $simple_list, $this->empty_attributes ),
+            '<ol><li>red</li><li>blue</li><li>green</li><li>yellow</li></ol>'
+    );
 
     // Test simple lists with attributes.
-    $this->assertEquals( Html::ul( $simple_list, $this->testing_attr ), '<ul class="test-class" id="test-id" numeric-attr empty-attr><li>red</li><li>blue</li><li>green</li><li>yellow</li></ul>' );
-    $this->assertEquals( Html::ol( $simple_list, $this->testing_attr ), '<ol class="test-class" id="test-id" numeric-attr empty-attr><li>red</li><li>blue</li><li>green</li><li>yellow</li></ol>' );
+    $this->assertEquals(
+            '<ul class="test-class" id="test-id" boolean-attr empty-attr="" true-attr><li>red</li><li>blue</li><li>green</li><li>yellow</li></ul>',
+            Html::ul( $simple_list, $this->testing_attr )
+    );
+    $this->assertEquals(
+            '<ol class="test-class" id="test-id" boolean-attr empty-attr="" true-attr><li>red</li><li>blue</li><li>green</li><li>yellow</li></ol>',
+            Html::ol( $simple_list, $this->testing_attr )
+    );
 
     // Test nested lists.
-    $this->assertEquals( Html::ul( $nested_list ), '<ul><li>colors<ul><li>red</li><li>blue</li><li>green</li><li>yellow</li></ul></li><li>numbers<ul><li>one</li><li>two</li><li>three</li><li>four</li></ul></li></ul>' );
-    $this->assertEquals( Html::ol( $nested_list ), '<ol><li>colors<ol><li>red</li><li>blue</li><li>green</li><li>yellow</li></ol></li><li>numbers<ol><li>one</li><li>two</li><li>three</li><li>four</li></ol></li></ol>' );
+    $this->assertEquals(
+            '<ul><li>colors<ul><li>red</li><li>blue</li><li>green</li><li>yellow</li></ul></li><li>numbers<ul><li>one</li><li>two</li><li>three</li><li>four</li></ul></li></ul>',
+            Html::ul( $nested_list )
+    );
+    $this->assertEquals(
+            '<ol><li>colors<ol><li>red</li><li>blue</li><li>green</li><li>yellow</li></ol></li><li>numbers<ol><li>one</li><li>two</li><li>three</li><li>four</li></ol></li></ol>',
+            Html::ol( $nested_list )
+    );
   }
 
   /**
@@ -252,16 +285,36 @@ class HtmlTest extends WP_UnitTestCase {
    */
   public function test_overloading() {
     // test overloding tags.
-    $this->assertEquals( Html::br(), '<br />' );
-    $this->assertEquals( Html::div(), '<div></div>' );
+    $this->assertEquals(
+            '<br />',
+            Html::br()
+    );
+
+    $this->assertEquals(
+            '<div></div>',
+            Html::div()
+    );
 
     // Test with content but without attributes.
-    $this->assertEquals( Html::br( 'Arbitray content' ), '<br />' );
-    $this->assertEquals( Html::div( 'Arbitray content' ), '<div>Arbitray content</div>' );
+    $this->assertEquals(
+            '<br />',
+            Html::br( 'Arbitray content' )
+    );
+
+    $this->assertEquals(
+            '<div>Arbitray content</div>',
+            Html::div( 'Arbitray content' )
+    );
 
     // Test with content with attributes.
-    $this->assertEquals( Html::br( 'Arbitray content', $this->testing_attr ), '<br class="test-class" id="test-id" numeric-attr empty-attr />' );
-    $this->assertEquals( Html::div( 'Arbitray content', $this->testing_attr ), '<div class="test-class" id="test-id" numeric-attr empty-attr>Arbitray content</div>' );
+    $this->assertEquals(
+            '<br class="test-class" id="test-id" boolean-attr empty-attr="" true-attr />',
+            Html::br( 'Arbitray content', $this->testing_attr )
+    );
+
+    $this->assertEquals(
+            Html::div( 'Arbitray content', $this->testing_attr ),
+            '<div class="test-class" id="test-id" boolean-attr empty-attr="" true-attr>Arbitray content</div>' );
 
     $this->assertEquals( Html::div( null ), '<div></div>' );
     $this->assertEquals( Html::div( false ), '<div></div>' );

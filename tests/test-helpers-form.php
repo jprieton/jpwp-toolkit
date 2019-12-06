@@ -28,9 +28,9 @@ class FormTest extends WP_UnitTestCase {
       'id'         => 'test-id',
       'boolean-attr',
       'empty-attr' => '',
+      'true-attr'  => true, // same as boolean attribute.
       'false-attr' => false, // must be hidden.
-      'empty-attr' => null,
-      0            => 'numeric-attr',
+      'null-attr'  => null, // must be hidden.
   ];
 
   /**
@@ -73,17 +73,17 @@ class FormTest extends WP_UnitTestCase {
     $this->assertEquals( '<label>1</label>', Form::label( true ) );
 
     // Test with content and attributes.
-    $this->assertEquals( '<label class="test-class" id="test-id" numeric-attr empty-attr>Arbitray content</label>',
+    $this->assertEquals( '<label class="test-class" id="test-id" boolean-attr empty-attr="" true-attr>Arbitray content</label>',
             Form::label( 'Arbitray content', $this->testing_attr ) );
 
     // Empty values generates an empty label.
-    $this->assertEquals( '<label class="test-class" id="test-id" numeric-attr empty-attr></label>',
+    $this->assertEquals( '<label class="test-class" id="test-id" boolean-attr empty-attr="" true-attr></label>',
             Form::label( null, $this->testing_attr ) );
-    $this->assertEquals( '<label class="test-class" id="test-id" numeric-attr empty-attr></label>',
+    $this->assertEquals( '<label class="test-class" id="test-id" boolean-attr empty-attr="" true-attr></label>',
             Form::label( false, $this->testing_attr ) );
 
     // True is converted to integer.
-    $this->assertEquals( '<label class="test-class" id="test-id" numeric-attr empty-attr>1</label>',
+    $this->assertEquals( '<label class="test-class" id="test-id" boolean-attr empty-attr="" true-attr>1</label>',
             Form::label( true, $this->testing_attr ) );
   }
 
@@ -103,18 +103,67 @@ class FormTest extends WP_UnitTestCase {
     $this->assertEquals( '<button type="button">1</button>', Form::button( true ) );
 
     // Test with content and attributes.
-    $this->assertEquals( '<button type="button" class="test-class" id="test-id" numeric-attr empty-attr>Arbitray content</button>',
+    $this->assertEquals(
+            '<button type="button" class="test-class" id="test-id" boolean-attr empty-attr="" true-attr>Arbitray content</button>',
             Form::button( 'Arbitray content', $this->testing_attr ) );
 
     // Empty values generates an empty button.
-    $this->assertEquals( '<button type="button" class="test-class" id="test-id" numeric-attr empty-attr></button>',
+    $this->assertEquals(
+            '<button type="button" class="test-class" id="test-id" boolean-attr empty-attr="" true-attr></button>',
             Form::button( null, $this->testing_attr ) );
-    $this->assertEquals( '<button type="button" class="test-class" id="test-id" numeric-attr empty-attr></button>',
+    $this->assertEquals(
+            '<button type="button" class="test-class" id="test-id" boolean-attr empty-attr="" true-attr></button>',
             Form::button( false, $this->testing_attr ) );
 
     // True is converted to integer.
-    $this->assertEquals( '<button type="button" class="test-class" id="test-id" numeric-attr empty-attr>1</button>',
+    $this->assertEquals(
+            '<button type="button" class="test-class" id="test-id" boolean-attr empty-attr="" true-attr>1</button>',
             Form::button( true, $this->testing_attr ) );
+  }
+
+  /**
+   * Test cases for Form:option()
+   */
+  public function test_option() {
+    $this->assertEquals(
+            Form::option( '' ),
+            ''
+    );
+
+    $this->assertEquals(
+            '<option value="Label">Label</option>',
+            Form::option( 'Label' )
+    );
+
+    $this->assertEquals(
+            '<option value="value">Label</option>',
+            Form::option( 'Label', [ 'value' => "value" ] )
+    );
+
+    $this->assertEquals(
+            '<option value="value" selected>Label</option>',
+            Form::option( 'Label', [ 'value' => 'value', 'selected' => true ] )
+    );
+
+    $this->assertEquals(
+            '<option value="value">Label</option>',
+            Form::option( 'Label', [ 'value' => 'value', 'selected' => false ] )
+    );
+
+    $this->assertEquals(
+            '<option value="value">Label</option>',
+            Form::option( 'Label', [ 'value' => 'value', 'selected' => null ] )
+    );
+
+    $this->assertEquals(
+            '<option value="value">Label</option>',
+            Form::option( 'Label', [ 'value' => 'value', 'selected' => '' ] )
+    );
+
+    $this->assertEquals(
+            '<option value="value" selected>Label</option>',
+            Form::option( 'Label', [ 'value' => 'value', 'selected' => 'value' ] )
+    );
   }
 
 }

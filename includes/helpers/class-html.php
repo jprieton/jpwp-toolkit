@@ -1,8 +1,8 @@
 <?php
 /**
- * The Html class is a helper that provides a set of static methods for 
+ * The Html class is a helper that provides a set of static methods for
  * generating commonly used HTML tags
- * 
+ *
  * @package       JPWPToolkit
  * @subpackage    Helpers
  */
@@ -178,41 +178,43 @@ class Html {
    *
    * @since   0.1.0
    *
-   * @param   array|string $attributes An array of html attributes.
+   * @param   array|string $attr An array of html attributes.
    * @return  string
    */
-  public static function parse_attributes( $attributes = [] ) {
-    $attributes = wp_parse_args( $attributes );
+  public static function parse_attributes( $attr = [] ) {
+    $attr = wp_parse_args( $attr );
 
-    if ( count( $attributes ) == 0 ) {
+    if ( count( $attr ) == 0 ) {
       return '';
     }
 
     $_attributes = [];
 
-    foreach ( (array) $attributes as $key => $value ) {
+    foreach ( (array) $attr as $key => $value ) {
+      // Skip invalid key/values
       if ( is_bool( $value ) && !$value ) {
         continue;
-      }
-
-      if ( is_numeric( $key ) && (empty( $value ) || is_bool( $value )) ) {
+      } else
+      if ( is_bool( $value ) && is_numeric( $key ) ) {
+        continue;
+      } else
+      if ( is_null( $value ) || is_null( $key ) ) {
+        continue;
+      } else
+      if ( is_numeric( $key ) && empty( $value ) ) {
         continue;
       }
 
-      if ( is_numeric( $key ) && !is_bool( $value ) ) {
+      // Boolean values
+      if ( is_numeric( $key ) ) {
         $key   = $value;
-        $value = null;
-      }
-
+        $value = true;
+      } else
       if ( is_bool( $value ) && $value ) {
-        $value = null;
+        $value = true;
       }
 
-      if ( is_array( $value ) ) {
-        $value = implode( ' ', $value );
-      }
-
-      if ( !is_null( $value ) ) {
+      if ( !is_bool( $value ) ) {
         $_attributes[] = sprintf( '%s="%s"', trim( esc_attr( $key ) ), trim( esc_attr( $value ) ) );
       } else {
         $_attributes[] = trim( esc_attr( $key ) );

@@ -126,8 +126,8 @@ class FormTest extends WP_UnitTestCase {
    */
   public function test_option() {
     $this->assertEquals(
-            Form::option( '' ),
-            ''
+            '',
+            Form::option( '' )
     );
 
     $this->assertEquals(
@@ -164,6 +164,10 @@ class FormTest extends WP_UnitTestCase {
             '<option value="value" selected>Label</option>',
             Form::option( 'Label', [ 'value' => 'value', 'selected' => 'value' ] )
     );
+  }
+
+  public function test_select() {
+    
   }
 
 }

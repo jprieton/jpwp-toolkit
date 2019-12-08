@@ -3,7 +3,7 @@
  * Plugin Name:   JPWP Toolkit
  * Plugin URI:    https://github.com/jprieton/jpwp-toolkit
  * Description:   An extensible object-oriented set of tools for WordPress that helps you to develop themes and plugins.
- * Version:       0.3.0
+ * Version:       0.3.1
  * Author:        Javier Prieto
  * Author URI:    https://github.com/jprieton
  * Text Domain:   jpwp-toolkit
@@ -35,10 +35,8 @@ defined( 'ABSPATH' ) || exit;
  */
 define( 'JPWP_VERSION', '0.3.0' );
 define( 'JPWP_FILENAME', __FILE__ );
-define( 'JPWP_BASENAME', plugin_basename( __FILE__ ) );
-define( 'JPWP_BASEDIR', trailingslashit( __DIR__ ) );
 define( 'JPWP_BASEURL', plugin_dir_url( __FILE__ ) );
-define( 'JPWP_ABSPATH', plugin_dir_path( JPWP_FILENAME ) . 'includes' );
+define( 'JPWP_ABSPATH', plugin_dir_path( JPWP_FILENAME ) );
 
 /**
  * Registering an autoload implementation
@@ -68,7 +66,7 @@ spl_autoload_register( function( $class_name ) {
     array_pop( $namespace );
   }
 
-  $namespace[0] = JPWP_ABSPATH;
+  $namespace[0] = JPWP_ABSPATH . 'includes';
   $namespace[]  = $class_filename;
 
   $filename = implode( DIRECTORY_SEPARATOR, $namespace ) . '.php';
@@ -94,9 +92,6 @@ spl_autoload_register( function( $class_name ) {
                     "<b><code>{$class_name}</code></b>" ) );  // phpcs:ignore
   }
 } );
-
-// Load the plugin textdomain.
-add_action( 'plugins_loaded', [ 'JPWPToolkit\Core\Textdomain', 'load_plugin_textdomain' ] );
 
 use JPWPToolkit\Core\Admin_Notice;
 use JPWPToolkit\Core\Init;

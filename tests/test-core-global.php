@@ -1,13 +1,13 @@
 <?php
 /**
  * Testing core setup
- * 
+ *
  * @package JPWPToolkit/Tests
  */
 
 /**
  * Testing core setup
- * 
+ *
  * @since 0.3.0
  */
 class CoreTest extends WP_UnitTestCase {
@@ -21,7 +21,6 @@ class CoreTest extends WP_UnitTestCase {
         'JPWP_VERSION',
         'JPWP_FILENAME',
         'JPWP_BASENAME',
-        'JPWP_BASEDIR',
         'JPWP_BASEURL',
         'JPWP_ABSPATH',
     ];

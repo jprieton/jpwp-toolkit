@@ -1,7 +1,7 @@
 <?php
 /**
  * Add the placeholder handler to Html::img()
- * 
+ *
  * @package       JPWPToolkit
  * @subpackage    Filter
  */
@@ -16,9 +16,9 @@ use JPWPToolkit\Abstracts\Img_Shorthand as Abstract_Img_Shorthand;
 
 /**
  * Add the placeholder shorthand to Html::img() method
- * Some examples of shorthands are placeholder, placeholder:200, placeholder:300x150, placeholder:none, 
- * placeholder:medium 
- * 
+ * Some examples of shorthands are placeholder, placeholder:200, placeholder:300x150, placeholder:none,
+ * placeholder:medium
+ *
  * @package       JPWPToolkit
  * @subpackage    Filters
  * @since         0.1.0
@@ -28,14 +28,14 @@ class Img_Placeholder_Shorthand extends Abstract_Img_Shorthand implements Interf
 
   /**
    * Adds Img_Shorthand methods and properties
-   * 
+   *
    * @since     0.1.0
    */
   use \JPWPToolkit\Traits\Img_Shorthand;
 
   /**
    * Shorthand handler
-   * 
+   *
    * @var     string
    * @since   0.1.0
    */
@@ -43,7 +43,7 @@ class Img_Placeholder_Shorthand extends Abstract_Img_Shorthand implements Interf
 
   /**
    * Overrides the class constructor to allow use the WordPress image sizes as shorthand for placeholder
-   * 
+   *
    * @since     0.1.0
    */
   public function __construct() {
@@ -63,9 +63,9 @@ class Img_Placeholder_Shorthand extends Abstract_Img_Shorthand implements Interf
 
   /**
    * Parse the shorthand
-   * 
+   *
    * @since   0.1.0
-   * 
+   *
    * @param array  $attributes An array of html attributes.
    * @param string $src The img handler.
    */
@@ -75,7 +75,7 @@ class Img_Placeholder_Shorthand extends Abstract_Img_Shorthand implements Interf
     $lang             = substr( get_locale(), 0, 2 );
     $default_img_path = "assets/images/placeholder-{$lang}.svg";
 
-    if ( file_exists( JPWP_BASEDIR . $default_img_path ) ) {
+    if ( file_exists( JPWP_ABSPATH . $default_img_path ) ) {
       $src = JPWP_BASEURL . $default_img_path;
     } else {
       $src = JPWP_BASEURL . 'assets/images/placeholder.svg';
@@ -100,9 +100,9 @@ class Img_Placeholder_Shorthand extends Abstract_Img_Shorthand implements Interf
 
   /**
    * Allow to use the WordPress image sizes as alias of placeholder
-   * 
+   *
    * @since   0.1.0
-   * 
+   *
    * @param   string $src The img handler.
    * @return  string
    */

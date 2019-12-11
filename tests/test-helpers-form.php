@@ -166,8 +166,4 @@ class FormTest extends WP_UnitTestCase {
     );
   }
 
-  public function test_select() {
-    
-  }
-
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * Class to initialize the plugin
- * 
+ *
  * @package       JPWPToolkit
  * @subpackage    Core
  */
@@ -22,6 +22,8 @@ use JPWPToolkit\Filters\Options_Weekdays_Shorthand;
 use JPWPToolkit\Filters\Options_Months_Shorthand;
 // Plugin schedule tasks.
 use JPWPToolkit\Core\Schedule_Events;
+// Shortcodes
+use JPWPToolkit\Shortcodes\Mailto;
 
 /**
  * Class to initialize plugin
@@ -35,7 +37,7 @@ final class Init {
 
   /**
    * Adds Singleton methods and properties
-   * 
+   *
    * @since     0.1.0
    */
   use \JPWPToolkit\Traits\Singleton;
@@ -57,11 +59,14 @@ final class Init {
 
     // Add image shorthands filters.
     $this->add_options_shorthands();
+
+    // Add shortcodes.
+    $this->add_shortcodes();
   }
 
   /**
    * Initialize scheduled tasks
-   * 
+   *
    * @since     0.3.0
    */
   private function add_scheduled_events() {
@@ -96,6 +101,15 @@ final class Init {
   private function add_options_shorthands() {
     new Options_Weekdays_Shorthand();
     new Options_Months_Shorthand();
+  }
+
+  /**
+   * Add Shortcodes
+   *
+   * @since     0.3.0
+   */
+  private function add_shortcodes() {
+    new Mailto();
   }
 
 }

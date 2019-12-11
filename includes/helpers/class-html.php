@@ -277,10 +277,10 @@ class Html {
    *
    * @param   string       $email     The email address.
    * @param   string       $content   The content between tags.
-   * @param   array|string $attributes An array of html attributes.
+   * @param   array|string $attr      An array of html attributes.
    * @return  string
    */
-  public static function mailto( $email, $content = null, $attributes = [] ) {
+  public static function mailto( $email, $content = null, $attr = [] ) {
     if ( empty( $email ) || !is_email( $email ) ) {
       return '';
     }
@@ -288,12 +288,12 @@ class Html {
     $content = $content ?: antispambot( $email );
     $email   = antispambot( 'mailto:' . $email );
 
-    $defaults   = [
+    $defaults = [
         'href' => $email,
     ];
-    $attributes = wp_parse_args( $attributes, $defaults );
+    $attr     = wp_parse_args( $attr, $defaults );
 
-    return self::tag( 'a', $content, $attributes );
+    return self::tag( 'a', $content, $attr );
   }
 
   /**
@@ -302,10 +302,10 @@ class Html {
    * @since   0.1.0
    *
    * @param   array|string $list    Elements of the list.
-   * @param   array|string $attributes An array of html attributes.
+   * @param   array|string $attr    An array of html attributes.
    * @return  string
    */
-  public static function ul( $list, $attributes = [] ) {
+  public static function ul( $list, $attr = [] ) {
     $content = '';
 
     foreach ( (array) $list as $key => $item ) {
@@ -316,7 +316,7 @@ class Html {
       }
     }
 
-    $content = self::tag( 'ul', $content, $attributes );
+    $content = self::tag( 'ul', $content, $attr );
     return $content;
   }
 
@@ -326,10 +326,10 @@ class Html {
    * @since   0.1.0
    *
    * @param   array|string $list    Elements of the list.
-   * @param   array|string $attributes An array of html attributes.
+   * @param   array|string $attr    An array of html attributes.
    * @return  string
    */
-  public static function ol( $list, $attributes = [] ) {
+  public static function ol( $list, $attr = [] ) {
     $content = '';
 
     foreach ( (array) $list as $key => $item ) {
@@ -340,7 +340,7 @@ class Html {
       }
     }
 
-    $content = self::tag( 'ol', $content, $attributes );
+    $content = self::tag( 'ol', $content, $attr );
     return $content;
   }
 
